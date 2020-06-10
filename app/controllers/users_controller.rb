@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.json { render json: @user, status: :created }
+        format.json { render status: :created }
       else
-        format.json { render json: @user.errors, status: :bad_request }
+        format.json { render json: { errors: @user.errors }, status: :unprocessable_entity }
       end
     end
   end
