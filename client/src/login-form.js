@@ -1,16 +1,17 @@
-import React from "react";
-import styled from "@emotion/styled";
+/* eslint-disable no-debugger */
+import React from 'react'
+import styled from '@emotion/styled'
 
 const DisplayContainer = styled.div(
   {
-    position: "relative",
-    flex: "1",
+    position: 'relative',
+    flex: '1',
   },
-  ({ theme }) => ({
+  ({theme}) => ({
     color: theme.displayTextColor,
     background: theme.displayBackgroundColor,
-  })
-);
+  }),
+)
 
 function LoginForm() {
   return (
@@ -19,7 +20,7 @@ function LoginForm() {
         <label>Login</label>
       </form>
     </DisplayContainer>
-  );
+  )
 }
 
-export default LoginForm;
+export default LoginForm
