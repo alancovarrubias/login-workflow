@@ -25,7 +25,7 @@ RSpec.describe "/users", type: :request do
 
       it "responds with the username and a 200 status" do
         post users_url, params: { user: valid_attributes }
-        expect(json["username"]).to eq(valid_attributes[:username])
+        expect(json).to match_snapshot("valid_create_user")
         expect(response).to be_successful
       end
     end
@@ -39,8 +39,7 @@ RSpec.describe "/users", type: :request do
 
       it "responds with a hash of errors and a 400 status" do
         post users_url, params: { user: invalid_attributes }
-        expect(json).to have_key("username")
-        expect(json).to have_key("password")
+        expect(json).to match_snapshot("invalid_create_user")
         expect(response).to be_a_bad_request
       end
     end
