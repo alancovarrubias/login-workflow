@@ -1,9 +1,9 @@
+import "./global.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
 
-function FullApp() {
-  return <App />;
+if (module.hot) {
+  module.hot.accept();
 }
-
-ReactDOM.render(<FullApp />, document.getElementById("app"));
+ReactDOM.render(<App />, document.getElementById("app"));
