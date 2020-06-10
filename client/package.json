@@ -21,8 +21,7 @@
   "lint-staged": {
     "**/*.+(js|json|css|html|md)": [
       "prettier",
-      "jest --findRelatedTests",
-      "git add"
+      "jest --findRelatedTests"
     ]
   },
   "jest-runner-eslint": {
