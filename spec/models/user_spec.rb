@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "Factory Bot is valid" do
+    expect(build(:user)).to be_valid
+  end
+
+  describe "validations" do
+    it { should validate_presence_of(:username) }
+    it { should validate_uniqueness_of(:username) }
+    it { should validate_presence_of(:password) }
+  end
 end
