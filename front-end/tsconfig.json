@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "react",
+    "paths": {
+      "@test/*": ["../test/*"]
+    }
   }
 }

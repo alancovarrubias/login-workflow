@@ -1,5 +1,5 @@
 import React from 'react'
-import {render} from 'login-test-utils'
+import {render} from '@test/login-test-utils'
 import LoginForm from '../login-form'
 
 test('renders', () => {

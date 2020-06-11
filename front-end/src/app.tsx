@@ -3,7 +3,7 @@ import {ThemeProvider} from 'emotion-theming'
 import LoginForm from './login-form'
 import * as themes from './themes'
 
-function App() {
+function App(): React.FC<{}> {
   const [theme, setTheme] = React.useState('dark')
   const handleThemeChange = ({target: {value}}) => setTheme(value)
   return (
@@ -41,5 +41,3 @@ function App() {
   )
 }
 export default App
-
-/* eslint import/namespace:0 */
