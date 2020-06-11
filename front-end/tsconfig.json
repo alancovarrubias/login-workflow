@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "types": ["jest", "node", "webpack-env", "react", "react-dom"],
+    "jsx": "react",
+    "noEmit": true,
+    "esModuleInterop": true
+  }
+}
