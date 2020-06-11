@@ -1,6 +1,13 @@
 module.exports = {
-  ...require('./test/jest-common'),
-  collectCoverageFrom: ['**/src/**/*.js'],
+  rootDir: __dirname,
+  moduleNameMapper: {
+    '@test-utils/(.*)': '<rootDir>/test-utils/$1',
+  },
+  watchPlugins: [
+    'jest-watch-select-projects',
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
+  ],
   coverageThreshold: {
     global: {
       statements: 64,
@@ -9,5 +16,18 @@ module.exports = {
       lines: 70,
     },
   },
-  projects: ['test/jest.lint.js', 'test/jest.client.js', 'test/jest.server.js'],
+  globals: {
+    'ts-jest': {
+      diagnostics: {
+        warnOnly: true,
+      },
+      tsConfig: 'tsconfig.json',
+    },
+  },
+  moduleFileExtensions: ['js', 'ts', 'tsx'],
+  setupFilesAfterEnv: ['module-alias/register'],
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
+  preset: 'ts-jest',
+  testMatch: ['<rootDir>/src/**/__tests__/*.tsx'],
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
 }

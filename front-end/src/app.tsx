@@ -3,11 +3,11 @@ import {ThemeProvider} from 'emotion-theming'
 import LoginForm from './login-form'
 import * as themes from './themes'
 
-function App(): React.FC<{}> {
+const App: React.FC<{}> = (): JSX.Element => {
   const [theme, setTheme] = React.useState('dark')
   const handleThemeChange = ({target: {value}}) => setTheme(value)
   return (
-    <div>
+    <React.Fragment>
       <ThemeProvider theme={themes[theme]}>
         <h1>App</h1>
         <LoginForm />
@@ -37,7 +37,7 @@ function App(): React.FC<{}> {
           </fieldset>
         </div>
       </ThemeProvider>
-    </div>
+    </React.Fragment>
   )
 }
 export default App

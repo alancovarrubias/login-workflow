@@ -6,17 +6,7 @@ module.exports = api => {
 
   const presets = [
     ['@babel/preset-env', {modules: isTest ? 'commonjs' : false}],
-    '@babel/preset-react',
     '@babel/preset-typescript',
-    [
-      '@emotion/babel-preset-css-prop',
-      {
-        hoist: isProd,
-        sourceMap: !isProd,
-        autoLabel: !isProd,
-        labelFormat: '[filename]--[local]',
-      },
-    ],
   ]
   const plugins = ['@babel/plugin-transform-runtime']
   return {
