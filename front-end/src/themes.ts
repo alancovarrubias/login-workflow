@@ -6,13 +6,11 @@ export interface ThemeOptions {
   displayTextColor?: string
   displayBackgroundColor?: string
 }
-
 export interface ThemeMap {
   theme?: ThemeOptions
   [Theme.DARK]?: ThemeOptions
   [Theme.LIGHT]?: ThemeOptions
 }
-
 export const themeOptionsMap: ThemeMap = {
   [Theme.DARK]: {
     displayTextColor: 'white',
@@ -23,7 +21,6 @@ export const themeOptionsMap: ThemeMap = {
     displayBackgroundColor: 'white',
   },
 }
-
 export const themeList: Theme[] = Object.values(Theme)
 export const defaultTheme: Theme = Theme.DARK
 export const nonDefaultTheme: Theme = Theme.LIGHT

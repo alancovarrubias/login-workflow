@@ -1,33 +1,41 @@
 import React from 'react'
 import {render} from '@testing-library/react'
+import user from '@testing-library/user-event'
 import App from '../app'
 import {Theme} from '../themes'
 
+const TEST_COLOR = 'white'
+const TEST_IDS = {
+  displayContainer: 'display-container',
+}
+function renderApp() {
+  return render(<App />)
+}
 describe('App', () => {
   it('renders dark theme by default', () => {
-    const {getByTestId} = render(<App />)
-    const displayContainer = getByTestId('display-container')
+    const {getByTestId} = renderApp()
+    const displayContainer = getByTestId(TEST_IDS.displayContainer)
     const darkInput = getByTestId(
       new RegExp(`theme-${Theme.DARK}`),
     ) as HTMLInputElement
-    expect(darkInput.checked).toBe(true)
-    expect(getComputedStyle(displayContainer).color).toBe('white')
+    expect(darkInput).toBeChecked()
+    expect(getComputedStyle(displayContainer).color).toBe(TEST_COLOR)
   })
 
   it('switches themes when light input is clicked', () => {
-    const {getByTestId} = render(<App />)
-    const displayContainer = getByTestId('display-container')
+    const {getByTestId} = renderApp()
+    const displayContainer = getByTestId(TEST_IDS.displayContainer)
     const lightInput = getByTestId(
       new RegExp(`theme-${Theme.LIGHT}`),
     ) as HTMLInputElement
-    lightInput.click()
-    expect(lightInput.checked).toBe(true)
-    expect(getComputedStyle(displayContainer).backgroundColor).toBe('white')
+    user.click(lightInput)
+    expect(lightInput).toBeChecked()
+    expect(getComputedStyle(displayContainer).backgroundColor).toBe(TEST_COLOR)
   })
 })
 
 test('render', () => {
-  const {container} = render(<App />)
+  const {container} = renderApp()
   expect(container).toMatchInlineSnapshot(`
     .emotion-0 {
       color: white;
@@ -44,33 +52,34 @@ test('render', () => {
       </h1>
       <form>
         <label
-          for="uname"
+          for="username"
         >
-          <b>
-            Username
-          </b>
+          Username
         </label>
         <input
-          name="uname"
+          id="username"
+          name="username"
           placeholder="Enter Username"
-          type="text"
+          type="username"
+          value=""
         />
         <label
-          for="psw"
+          for="password"
         >
-          <b>
-            Password
-          </b>
+          Password
         </label>
         <input
-          name="psw"
+          id="password"
+          name="password"
           placeholder="Enter Password"
           type="password"
+          value=""
         />
         <button
+          role="button"
           type="submit"
         >
-          Login
+          Submit
         </button>
       </form>
       <div
@@ -87,6 +96,7 @@ test('render', () => {
             <input
               checked=""
               data-testid="theme-dark"
+              id="theme-dark"
               type="radio"
               value="dark"
             />
@@ -95,6 +105,7 @@ test('render', () => {
              light
             <input
               data-testid="theme-light"
+              id="theme-light"
               type="radio"
               value="light"
             />

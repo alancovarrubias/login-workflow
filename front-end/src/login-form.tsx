@@ -1,20 +1,65 @@
-/* eslint-disable no-debugger */
 import React from 'react'
+import {useFormik} from 'formik'
 
-const LoginForm: React.FC<{}> = (): JSX.Element => {
+export interface LoginFormValues {
+  username?: string
+  password?: string
+}
+
+interface OtherProps {
+  onSubmit?: (values: LoginFormValues) => void
+}
+
+const validate = values => {
+  const errors: LoginFormValues = {}
+  if (!values.username) {
+    errors.username = 'Required'
+  }
+  return errors
+}
+
+const loginHandler = (values: LoginFormValues): void => {
+  console.log(values)
+}
+const LoginForm = ({
+  onSubmit = loginHandler,
+  username = '',
+  password = '',
+}: OtherProps & LoginFormValues): JSX.Element => {
+  const {values, handleChange, handleSubmit, isSubmitting} = useFormik({
+    initialValues: {
+      username: username,
+      password: password,
+    },
+    validate,
+    onSubmit: values => {
+      onSubmit(values)
+    },
+  })
   return (
-    <form>
-      <label htmlFor="uname">
-        <b>Username</b>
-      </label>
-      <input type="text" placeholder="Enter Username" name="uname" />
-      <label htmlFor="psw">
-        <b>Password</b>
-      </label>
-      <input type="password" placeholder="Enter Password" name="psw" />
-      <button type="submit">Login</button>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        type="username"
+        placeholder="Enter Username"
+        onChange={handleChange}
+        value={values.username}
+      />
+      <label htmlFor="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        placeholder="Enter Password"
+        onChange={handleChange}
+        value={values.password}
+      />
+      <button role="button" type="submit" disabled={isSubmitting}>
+        Submit
+      </button>
     </form>
   )
 }
-
 export default LoginForm

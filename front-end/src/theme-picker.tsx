@@ -30,6 +30,7 @@ const ThemePicker = ({
             <label key={index}>
               {` ${themeValue}`}
               <input
+                id={`theme-${themeValue}`}
                 data-testid={`theme-${themeValue}`}
                 value={themeValue}
                 checked={theme === themeValue}

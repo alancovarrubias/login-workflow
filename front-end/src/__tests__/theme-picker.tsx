@@ -1,5 +1,6 @@
 import React from 'react'
 import {render} from '../../test-utils/react'
+import user from '@testing-library/user-event'
 import ThemePicker from '../theme-picker'
 import {defaultTheme, nonDefaultTheme, themeList, Theme} from '../themes'
 
@@ -21,18 +22,18 @@ describe('ThemePicker', () => {
   it('renders inputs equal to the number of themes', () => {
     const {getThemeInputs} = renderThemePicker()
     const themeInputs = getThemeInputs(ALL_THEMES) as HTMLElement[]
-    expect(themeInputs.length).toEqual(themeList.length)
+    expect(themeInputs.length).toBe(themeList.length)
   })
   it('calls onThemeChange when non default input is clicked', () => {
     const {mockOnThemeChange, getThemeInputs} = renderThemePicker()
     const nonDefaultInput = getThemeInputs(nonDefaultTheme) as HTMLElement
-    nonDefaultInput.click()
+    user.click(nonDefaultInput)
     expect(mockOnThemeChange).toHaveBeenCalledTimes(1)
   })
   it('does not call onThemeChange when default input is clicked', () => {
     const {mockOnThemeChange, getThemeInputs} = renderThemePicker()
     const defaultInput = getThemeInputs(defaultTheme) as HTMLElement
-    defaultInput.click()
+    user.click(defaultInput)
     expect(mockOnThemeChange).not.toHaveBeenCalled()
   })
 })
