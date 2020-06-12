@@ -8,11 +8,7 @@ export interface ThemeOptions {
   displayBackgroundColor?: string
 }
 
-export interface ThemeOptionsMap {
-  [name: string]: ThemeOptions
-}
-
-export const themeOptionsMap: ThemeOptionsMap = {
+export const themeOptionsMap = {
   [Themes.DARK]: {
     displayTextColor: 'white',
     displayBackgroundColor: '#1c191c',

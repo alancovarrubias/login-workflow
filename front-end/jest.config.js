@@ -30,6 +30,7 @@ module.exports = {
   testMatch: ['<rootDir>/src/**/__tests__/*.tsx'],
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
+    'jest-axe/extend-expect',
     'module-alias/register',
   ],
   snapshotSerializers: ['jest-emotion'],

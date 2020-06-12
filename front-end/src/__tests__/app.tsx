@@ -23,6 +23,7 @@ test('renders', () => {
       </form>
       <div
         class="emotion-0"
+        data-testid="display-container"
         style="margin-top: 30px;"
       >
         <fieldset>
@@ -30,21 +31,23 @@ test('renders', () => {
             Theme
           </legend>
           <label>
+             dark
             <input
               checked=""
-              name="theme"
+              data-testid="dark"
+              id="dark"
               type="radio"
               value="dark"
             />
-             dark
           </label>
           <label>
+             light
             <input
-              name="theme"
+              data-testid="light"
+              id="light"
               type="radio"
               value="light"
             />
-             light
           </label>
         </fieldset>
       </div>
