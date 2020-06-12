@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginForm from '../login-form'
-import {render} from '@test-utils/login'
+import {render} from '../../test-utils/react'
 
 test('renders', () => {
   const {container} = render(<LoginForm />)

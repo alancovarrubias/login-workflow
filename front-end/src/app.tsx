@@ -1,39 +1,33 @@
 import React from 'react'
 import {ThemeProvider} from 'emotion-theming'
 import LoginForm from './login-form'
-import * as themes from './themes'
+import {Themes, themeOptionsMap} from './themes'
 
 const App: React.FC<{}> = (): JSX.Element => {
-  const [theme, setTheme] = React.useState('dark')
+  const [currentTheme, setTheme] = React.useState(Themes.DARK)
   const handleThemeChange = ({target: {value}}) => setTheme(value)
   return (
     <React.Fragment>
-      <ThemeProvider theme={themes[theme]}>
+      <ThemeProvider theme={themeOptionsMap[currentTheme]}>
         <h1>App</h1>
         <LoginForm />
         <div style={{marginTop: 30}}>
           <fieldset>
             <legend>Theme</legend>
-            <label>
-              <input
-                onChange={handleThemeChange}
-                checked={theme === 'light'}
-                type="radio"
-                name="theme"
-                value="light"
-              />{' '}
-              light
-            </label>
-            <label>
-              <input
-                onChange={handleThemeChange}
-                checked={theme === 'dark'}
-                type="radio"
-                name="theme"
-                value="dark"
-              />{' '}
-              dark
-            </label>
+            {['dark', 'light'].map((theme, index) => {
+              return (
+                <label key={index}>
+                  <input
+                    onChange={handleThemeChange}
+                    checked={theme === currentTheme}
+                    type="radio"
+                    name="theme"
+                    value={theme}
+                  />
+                  {` ${theme}`}
+                </label>
+              )
+            })}
           </fieldset>
         </div>
       </ThemeProvider>

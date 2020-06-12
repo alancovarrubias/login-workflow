@@ -1,10 +1,13 @@
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     path: path.resolve('dist'),
     filename: 'bundle.js',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
   },
   module: {
     rules: [
@@ -22,6 +25,10 @@ module.exports = {
             options: {modules: true, localsConvention: 'camelCaseOnly'},
           },
         ],
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        loader: 'awesome-typescript-loader',
       },
       {
         test: /\.js$/,
