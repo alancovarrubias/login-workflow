@@ -10,7 +10,7 @@ const App: FunctionComponent<{}> = (): JSX.Element => {
   return (
     <React.Fragment>
       <ThemeProvider theme={themeOptionsMap[theme]}>
-        <h1>App</h1>
+        <h1>Sports App</h1>
         <LoginForm />
         <ThemePicker theme={theme} onThemeChange={handleThemeChange} />
       </ThemeProvider>

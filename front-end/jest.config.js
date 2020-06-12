@@ -1,19 +1,12 @@
 module.exports = {
-  rootDir: __dirname,
-  moduleNameMapper: {
-    '@test-utils/(.*)': '<rootDir>/test-utils/$1',
-  },
-  watchPlugins: [
-    'jest-watch-select-projects',
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname',
-  ],
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
+  coveragePathIgnorePatterns: ['<rootDir>/src/index.ts'],
   coverageThreshold: {
     global: {
-      statements: 64,
-      branches: 0,
-      functions: 73,
-      lines: 70,
+      statements: 90,
+      branches: 90,
+      functions: 90,
+      lines: 90,
     },
   },
   globals: {
@@ -25,13 +18,23 @@ module.exports = {
     },
   },
   moduleFileExtensions: ['js', 'ts', 'tsx'],
-  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
+  moduleNameMapper: {
+    '@test-utils/(.*)': '<rootDir>/test-utils/$1',
+    '\\.module\\.css$': 'identity-obj-proxy',
+    '\\.css$': require.resolve('./test/style-mock.js'),
+  },
+  watchPlugins: [
+    'jest-watch-select-projects',
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
+  ],
   preset: 'ts-jest',
-  testMatch: ['<rootDir>/src/**/__tests__/*.tsx'],
+  rootDir: __dirname,
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
     'jest-axe/extend-expect',
     'module-alias/register',
   ],
   snapshotSerializers: ['jest-emotion'],
+  testMatch: ['<rootDir>/src/**/__tests__/*.tsx'],
 }

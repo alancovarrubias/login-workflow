@@ -4,8 +4,9 @@ import {ThemeOptions, DefaultTheme, ThemeList} from './themes'
 
 const DisplayContainer = styled.div(
   {
-    position: 'relative',
-    lineHeight: '13px',
+    input: {
+      cursor: 'pointer',
+    },
   },
   ({theme}: {theme: ThemeOptions}) => ({
     color: theme.displayTextColor,

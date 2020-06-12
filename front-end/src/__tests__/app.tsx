@@ -1,5 +1,5 @@
 import React from 'react'
-import {render} from '../../test-utils/react'
+import {render} from '@testing-library/react'
 import App from '../app'
 import {Themes} from '../themes'
 
@@ -24,4 +24,85 @@ describe('App', () => {
     expect(lightInput.checked).toBe(true)
     expect(getComputedStyle(displayContainer).backgroundColor).toBe('white')
   })
+})
+
+test('render', () => {
+  const {container} = render(<App />)
+  expect(container).toMatchInlineSnapshot(`
+    .emotion-0 {
+      color: white;
+      background: #1c191c;
+    }
+
+    .emotion-0 input {
+      cursor: pointer;
+    }
+
+    <div>
+      <h1>
+        Sports App
+      </h1>
+      <form>
+        <label
+          for="uname"
+        >
+          <b>
+            Username
+          </b>
+        </label>
+        <input
+          name="uname"
+          placeholder="Enter Username"
+          type="text"
+        />
+        <label
+          for="psw"
+        >
+          <b>
+            Password
+          </b>
+        </label>
+        <input
+          name="psw"
+          placeholder="Enter Password"
+          type="password"
+        />
+        <button
+          type="submit"
+        >
+          Login
+        </button>
+      </form>
+      <div
+        class="emotion-0"
+        data-testid="display-container"
+        style="margin-top: 30px;"
+      >
+        <fieldset>
+          <legend>
+            Theme
+          </legend>
+          <label>
+             dark
+            <input
+              checked=""
+              data-testid="theme-dark"
+              id="dark"
+              type="radio"
+              value="dark"
+            />
+          </label>
+          <label>
+             light
+            <input
+              data-testid="theme-light"
+              id="light"
+              type="radio"
+              value="light"
+            />
+          </label>
+        </fieldset>
+      </div>
+    </div>
+  `)
 })

@@ -1,29 +1,18 @@
 /* eslint-disable no-debugger */
 import React from 'react'
-/*
-import styled from '@emotion/styled'
-
-interface Theme {
-  displayTextColor: string
-  displayBackgroundColor: string
-}
-
-const DisplayContainer = styled.div(
-  {
-    position: 'relative',
-    flex: '1',
-  },
-  (theme: Theme) => ({
-    color: theme.displayTextColor,
-    background: theme.displayBackgroundColor,
-  }),
-)
-*/
 
 const LoginForm: React.FC<{}> = (): JSX.Element => {
   return (
     <form>
-      <label>Login</label>
+      <label htmlFor="uname">
+        <b>Username</b>
+      </label>
+      <input type="text" placeholder="Enter Username" name="uname" />
+      <label htmlFor="psw">
+        <b>Password</b>
+      </label>
+      <input type="password" placeholder="Enter Password" name="psw" />
+      <button type="submit">Login</button>
     </form>
   )
 }
