@@ -1,62 +1,27 @@
 import React from 'react'
 import {render} from '../../test-utils/react'
 import App from '../app'
+import {Themes} from '../themes'
 
-test('renders', () => {
-  const {container} = render(<App />)
-  expect(container).toMatchInlineSnapshot(`
-    .emotion-0 {
-      position: relative;
-      line-height: 13px;
-      color: white;
-      background: #1c191c;
-    }
+describe('App', () => {
+  it('renders dark theme by default', () => {
+    const {getByTestId} = render(<App />)
+    const displayContainer = getByTestId('display-container')
+    const darkInput = getByTestId(
+      new RegExp(`theme-${Themes.DARK}`),
+    ) as HTMLInputElement
+    expect(darkInput.checked).toBe(true)
+    expect(getComputedStyle(displayContainer).color).toBe('white')
+  })
 
-    <div>
-      <h1>
-        App
-      </h1>
-      <form>
-        <label>
-          Login
-        </label>
-      </form>
-      <div
-        class="emotion-0"
-        data-testid="display-container"
-        style="margin-top: 30px;"
-      >
-        <fieldset>
-          <legend>
-            Theme
-          </legend>
-          <label>
-             dark
-            <input
-              checked=""
-              data-testid="dark"
-              id="dark"
-              type="radio"
-              value="dark"
-            />
-          </label>
-          <label>
-             light
-            <input
-              data-testid="light"
-              id="light"
-              type="radio"
-              value="light"
-            />
-          </label>
-        </fieldset>
-      </div>
-    </div>
-  `)
-})
-
-test('header text content', () => {
-  const {getByText} = render(<App />)
-  const header = getByText('App')
-  expect(header).toHaveTextContent(/^App$/)
+  it('switches themes when light input is clicked', () => {
+    const {getByTestId} = render(<App />)
+    const displayContainer = getByTestId('display-container')
+    const lightInput = getByTestId(
+      new RegExp(`theme-${Themes.LIGHT}`),
+    ) as HTMLInputElement
+    lightInput.click()
+    expect(lightInput.checked).toBe(true)
+    expect(getComputedStyle(displayContainer).backgroundColor).toBe('white')
+  })
 })

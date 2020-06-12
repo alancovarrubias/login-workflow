@@ -1,6 +1,6 @@
 export enum Themes {
-  LIGHT = 'light',
   DARK = 'dark',
+  LIGHT = 'light',
 }
 
 export interface ThemeOptions {
@@ -8,7 +8,12 @@ export interface ThemeOptions {
   displayBackgroundColor?: string
 }
 
-export const themeOptionsMap = {
+export const ThemeList = Object.values(Themes)
+
+export const DefaultTheme = Themes.DARK
+export const NonDefaultTheme = Themes.LIGHT
+
+export const themeOptionsMap: {[name: string]: ThemeOptions} = {
   [Themes.DARK]: {
     displayTextColor: 'white',
     displayBackgroundColor: '#1c191c',

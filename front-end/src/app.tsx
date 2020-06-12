@@ -6,7 +6,7 @@ import ThemePicker from './theme-picker'
 
 const App: FunctionComponent<{}> = (): JSX.Element => {
   const [theme, setTheme] = React.useState(Themes.DARK)
-  const handleThemeChange = ({target: value}) => setTheme(value)
+  const handleThemeChange = event => setTheme(event.target.value)
   return (
     <React.Fragment>
       <ThemeProvider theme={themeOptionsMap[theme]}>

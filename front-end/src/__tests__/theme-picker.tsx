@@ -1,52 +1,33 @@
 import React from 'react'
 import {render} from '../../test-utils/react'
 import ThemePicker from '../theme-picker'
-import {Themes} from '../themes'
+import {DefaultTheme, NonDefaultTheme, ThemeList} from '../themes'
 
-function renderThemePicker({theme}) {
+function renderThemePicker() {
   const mockOnThemeChange = jest.fn()
-  const utils = render(
-    <ThemePicker onThemeChange={mockOnThemeChange} theme={theme} />,
-    {
-      theme,
-    },
-  )
+  const utils = render(<ThemePicker onThemeChange={mockOnThemeChange} />)
   return {
-    theme,
     mockOnThemeChange,
     ...utils,
   }
 }
-test('dark props render white text color and dark radio button checked', () => {
-  const {mockOnThemeChange, getByTestId, theme} = renderThemePicker({
-    theme: Themes.DARK,
+
+describe('ThemePicker', () => {
+  it('renders inputs equal to the number of themes', () => {
+    const {queryAllByTestId} = renderThemePicker()
+    const themeInputs = queryAllByTestId(/theme/)
+    expect(themeInputs.length).toEqual(ThemeList.length)
   })
-  const displayContainer = getByTestId('display-container')
-  expect(getComputedStyle(displayContainer).color).toBe('white')
-  const darkInput = getByTestId(theme) as HTMLInputElement
-  expect(darkInput.checked).toBe(true)
-  darkInput.click()
-  expect(mockOnThemeChange).not.toHaveBeenCalledTimes(1)
-
-  const otherTheme = Themes.LIGHT
-  const otherInput = getByTestId(otherTheme) as HTMLInputElement
-  otherInput.click()
-  expect(mockOnThemeChange).toHaveBeenCalledTimes(1)
-})
-
-test('light props render white background color and light radio button checked', () => {
-  const {mockOnThemeChange, getByTestId, theme} = renderThemePicker({
-    theme: Themes.LIGHT,
+  it('calls onThemeChange when non default input is clicked', () => {
+    const {mockOnThemeChange, queryByTestId} = renderThemePicker()
+    const nonDefaultInput = queryByTestId(`theme-${NonDefaultTheme}`)
+    nonDefaultInput.click()
+    expect(mockOnThemeChange).toHaveBeenCalledTimes(1)
   })
-  const displayContainer = getByTestId('display-container')
-  expect(getComputedStyle(displayContainer).backgroundColor).toBe('white')
-  const lightInput = getByTestId(theme) as HTMLInputElement
-  expect(lightInput.checked).toBe(true)
-  lightInput.click()
-  expect(mockOnThemeChange).not.toHaveBeenCalledTimes(1)
-
-  const otherTheme = Themes.DARK
-  const otherInput = getByTestId(otherTheme) as HTMLInputElement
-  otherInput.click()
-  expect(mockOnThemeChange).toHaveBeenCalledTimes(1)
+  it('does not call onThemeChange when default input is clicked', () => {
+    const {mockOnThemeChange, queryByTestId} = renderThemePicker()
+    const defaultInput = queryByTestId(`theme-${DefaultTheme}`)
+    defaultInput.click()
+    expect(mockOnThemeChange).not.toHaveBeenCalled()
+  })
 })
