@@ -1,32 +1,37 @@
 import React from 'react'
 import {render} from '../../test-utils/react'
 import ThemePicker from '../theme-picker'
-import {DefaultTheme, NonDefaultTheme, ThemeList} from '../themes'
+import {defaultTheme, nonDefaultTheme, themeList, Theme} from '../themes'
 
+const ALL_THEMES = 'ALL'
 function renderThemePicker() {
   const mockOnThemeChange = jest.fn()
   const utils = render(<ThemePicker onThemeChange={mockOnThemeChange} />)
+  const getThemeInputs = (theme: Theme | string): HTMLElement | HTMLElement[] =>
+    theme === ALL_THEMES
+      ? (utils.queryAllByTestId(/theme/) as HTMLElement[])
+      : (utils.getByTestId(new RegExp(`theme-${theme}`)) as HTMLElement)
   return {
     mockOnThemeChange,
-    ...utils,
+    getThemeInputs,
   }
 }
 
 describe('ThemePicker', () => {
   it('renders inputs equal to the number of themes', () => {
-    const {queryAllByTestId} = renderThemePicker()
-    const themeInputs = queryAllByTestId(/theme/)
-    expect(themeInputs.length).toEqual(ThemeList.length)
+    const {getThemeInputs} = renderThemePicker()
+    const themeInputs = getThemeInputs(ALL_THEMES) as HTMLElement[]
+    expect(themeInputs.length).toEqual(themeList.length)
   })
   it('calls onThemeChange when non default input is clicked', () => {
-    const {mockOnThemeChange, queryByTestId} = renderThemePicker()
-    const nonDefaultInput = queryByTestId(`theme-${NonDefaultTheme}`)
+    const {mockOnThemeChange, getThemeInputs} = renderThemePicker()
+    const nonDefaultInput = getThemeInputs(nonDefaultTheme) as HTMLElement
     nonDefaultInput.click()
     expect(mockOnThemeChange).toHaveBeenCalledTimes(1)
   })
   it('does not call onThemeChange when default input is clicked', () => {
-    const {mockOnThemeChange, queryByTestId} = renderThemePicker()
-    const defaultInput = queryByTestId(`theme-${DefaultTheme}`)
+    const {mockOnThemeChange, getThemeInputs} = renderThemePicker()
+    const defaultInput = getThemeInputs(defaultTheme) as HTMLElement
     defaultInput.click()
     expect(mockOnThemeChange).not.toHaveBeenCalled()
   })

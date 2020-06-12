@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {render as rtlRender, RenderResult} from '@testing-library/react'
 import {ThemeProvider} from 'emotion-theming'
-import {Themes, themeOptionsMap} from '../src/themes'
+import {Theme, themeOptionsMap} from '../src/themes'
 
 export interface RenderOptions {
   theme?: string
@@ -11,7 +11,7 @@ export interface RenderOptions {
 
 function render(
   ui: React.ReactElement,
-  {theme, ...options}: RenderOptions = {theme: Themes.DARK},
+  {theme, ...options}: RenderOptions = {theme: Theme.DARK},
 ): RenderResult {
   function Wrapper({children}) {
     return (

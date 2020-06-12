@@ -1,14 +1,14 @@
 import React from 'react'
 import {render} from '@testing-library/react'
 import App from '../app'
-import {Themes} from '../themes'
+import {Theme} from '../themes'
 
 describe('App', () => {
   it('renders dark theme by default', () => {
     const {getByTestId} = render(<App />)
     const displayContainer = getByTestId('display-container')
     const darkInput = getByTestId(
-      new RegExp(`theme-${Themes.DARK}`),
+      new RegExp(`theme-${Theme.DARK}`),
     ) as HTMLInputElement
     expect(darkInput.checked).toBe(true)
     expect(getComputedStyle(displayContainer).color).toBe('white')
@@ -18,7 +18,7 @@ describe('App', () => {
     const {getByTestId} = render(<App />)
     const displayContainer = getByTestId('display-container')
     const lightInput = getByTestId(
-      new RegExp(`theme-${Themes.LIGHT}`),
+      new RegExp(`theme-${Theme.LIGHT}`),
     ) as HTMLInputElement
     lightInput.click()
     expect(lightInput.checked).toBe(true)
@@ -80,14 +80,13 @@ test('render', () => {
       >
         <fieldset>
           <legend>
-            Theme
+            Themes
           </legend>
           <label>
              dark
             <input
               checked=""
               data-testid="theme-dark"
-              id="dark"
               type="radio"
               value="dark"
             />
@@ -96,7 +95,6 @@ test('render', () => {
              light
             <input
               data-testid="theme-light"
-              id="light"
               type="radio"
               value="light"
             />

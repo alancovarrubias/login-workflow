@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react'
 import styled from '@emotion/styled'
-import {ThemeOptions, DefaultTheme, ThemeList} from './themes'
+import {ThemeMap, Theme, defaultTheme, themeList} from './themes'
 
 const DisplayContainer = styled.div(
   {
@@ -8,29 +8,28 @@ const DisplayContainer = styled.div(
       cursor: 'pointer',
     },
   },
-  ({theme}: {theme: ThemeOptions}) => ({
+  ({theme}: ThemeMap) => ({
     color: theme.displayTextColor,
     background: theme.displayBackgroundColor,
   }),
 )
 interface ThemePickerProps {
-  theme?: string
+  theme?: Theme
   onThemeChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 const ThemePicker = ({
-  theme = DefaultTheme,
+  theme = defaultTheme,
   onThemeChange,
 }: ThemePickerProps): JSX.Element => {
   return (
     <DisplayContainer data-testid="display-container" style={{marginTop: 30}}>
       <fieldset>
-        <legend>Theme</legend>
-        {ThemeList.map((themeValue, index) => {
+        <legend>Themes</legend>
+        {themeList.map((themeValue, index) => {
           return (
             <label key={index}>
               {` ${themeValue}`}
               <input
-                id={themeValue}
                 data-testid={`theme-${themeValue}`}
                 value={themeValue}
                 checked={theme === themeValue}
