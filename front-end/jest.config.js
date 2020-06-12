@@ -36,5 +36,5 @@ module.exports = {
     'module-alias/register',
   ],
   snapshotSerializers: ['jest-emotion'],
-  testMatch: ['<rootDir>/src/**/__tests__/*.tsx'],
+  testMatch: ['<rootDir>/src/**/__tests__/**/*.tsx'],
 }

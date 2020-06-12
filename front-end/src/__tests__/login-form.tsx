@@ -40,9 +40,7 @@ describe('LoginForm', () => {
       })
     })
     it('clicks the login button', async () => {
-      const onSubmit = jest
-        .fn()
-        .mockResolvedValue(setTimeout(() => console.log('phew'), 1000))
+      const onSubmit = jest.fn()
       const {getByRole, getByPlaceholderText} = renderLoginForm({
         username,
         password,
