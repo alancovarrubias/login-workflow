@@ -25,9 +25,12 @@ module.exports = {
     },
   },
   moduleFileExtensions: ['js', 'ts', 'tsx'],
-  setupFilesAfterEnv: ['module-alias/register'],
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
   preset: 'ts-jest',
   testMatch: ['<rootDir>/src/**/__tests__/*.tsx'],
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom/extend-expect',
+    'module-alias/register',
+  ],
+  snapshotSerializers: ['jest-emotion'],
 }

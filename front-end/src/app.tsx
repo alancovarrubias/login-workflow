@@ -1,20 +1,31 @@
 import React from 'react'
+import styled from '@emotion/styled'
 import {ThemeProvider} from 'emotion-theming'
+import {Themes, themeOptionsMap, ThemeOptions} from './themes'
 import LoginForm from './login-form'
-import {Themes, themeOptionsMap} from './themes'
 
+const DisplayContainer = styled.div(
+  {
+    position: 'relative',
+    lineHeight: '13px',
+  },
+  ({theme}: {theme: ThemeOptions}) => ({
+    color: theme.displayTextColor,
+    background: theme.displayBackgroundColor,
+  }),
+)
 const App: React.FC<{}> = (): JSX.Element => {
-  const [currentTheme, setTheme] = React.useState(Themes.DARK)
-  const handleThemeChange = ({target: {value}}) => setTheme(value)
+  const [currentTheme, setCurrentTheme] = React.useState(Themes.DARK)
+  const handleThemeChange = ({target: {value}}) => setCurrentTheme(value)
   return (
     <React.Fragment>
       <ThemeProvider theme={themeOptionsMap[currentTheme]}>
         <h1>App</h1>
         <LoginForm />
-        <div style={{marginTop: 30}}>
+        <DisplayContainer style={{marginTop: 30}}>
           <fieldset>
             <legend>Theme</legend>
-            {['dark', 'light'].map((theme, index) => {
+            {[Themes.DARK, Themes.LIGHT].map((theme, index) => {
               return (
                 <label key={index}>
                   <input
@@ -29,7 +40,7 @@ const App: React.FC<{}> = (): JSX.Element => {
               )
             })}
           </fieldset>
-        </div>
+        </DisplayContainer>
       </ThemeProvider>
     </React.Fragment>
   )
