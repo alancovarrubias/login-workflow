@@ -1,5 +1,5 @@
 module.exports = {
-  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{js,jsx,ts,tsx}'],
   coveragePathIgnorePatterns: ['<rootDir>/src/index.ts'],
   coverageThreshold: {
     global: {
@@ -36,5 +36,5 @@ module.exports = {
     'module-alias/register',
   ],
   snapshotSerializers: ['jest-emotion'],
-  testMatch: ['<rootDir>/src/**/__tests__/**/*.tsx'],
+  testMatch: ['<rootDir>/src/**/__tests__/**/*.ts(x)?'],
 }
