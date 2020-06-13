@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  # POST /users
-  # POST /users.json
+  # protect_from_forgery except: [:create]
   def create
     @user = User.new(user_params)
 

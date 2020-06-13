@@ -21,12 +21,7 @@ const validate = values => {
 
 const loginHandler = (values: LoginFormValues): void => {
   const api = new Api()
-  console.log('sign up')
-  const ret = api.signUp(values.username, values.password).then(
-    res => console.log(res),
-    err => console.log(err),
-  )
-  console.log(ret)
+  api.signUp(values.username, values.password).then(res => console.log(res))
 }
 const LoginForm = ({
   onSubmit = loginHandler,

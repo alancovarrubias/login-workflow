@@ -4,6 +4,7 @@ export const handleRequestFailure = (
   response: AxiosResponse,
 ): Promise<Error> => {
   const {data, status} = response
+  console.log(response)
   const error: Error & {status?: number; data?: string} = new Error(
     `${status}: ${JSON.stringify(data)}`,
   )

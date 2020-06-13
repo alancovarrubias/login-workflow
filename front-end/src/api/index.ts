@@ -1,22 +1,20 @@
 import axios from 'axios'
 import {getData, handleRequestFailure} from '../../test-utils/api'
-function buildApi() {
-  const baseURL = 'http://localhost:3000'
-  const api = axios.create({baseURL})
-  api.interceptors.response.use(getData, handleRequestFailure)
-  return api
-}
+
+axios.interceptors.response.use(getData, handleRequestFailure)
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+axios.defaults.xsrfCookieName = 'CSRF-TOKEN'
+axios.defaults.xsrfHeaderName = 'X-CSRF-TOKEN'
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = 'http://localhost:3000'
 
 interface Requester {
   get?: Function
   post?: Function
 }
-interface NbaData {
-  signUp: Function
-}
+
 export default class Api {
-  constructor(private api: Requester = buildApi()) {}
   public signUp(username: string, password: string): Promise<string> {
-    return this.api.post('users', {username, password})
+    return axios.post('users', {username, password})
   }
 }
