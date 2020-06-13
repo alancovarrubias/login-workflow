@@ -6,21 +6,24 @@ RSpec.describe "Sessions", type: :request do
     context "with an authenticated user" do
       it "responds with a successful status" do
         user = create(:user, user_params)
-        mocked_user_class = mock_class("User")
-        allow(mocked_user_class).to receive(:authenticate).and_return(user)
         post session_url, params: { user: user_params }
         expect(response).to be_successful
+        expect(json).to match_snapshot("authenticated_user")
       end
     end
 
     context "with an unauthenticated user" do
       it "responds with an unauthorized status and an error message" do
-        mocked_user_class = mock_class("User")
-        allow(mocked_user_class).to receive(:authenticate).and_return(false)
         post session_url, params: { user: user_params }
         expect(response).to be_unauthorized
         expect(json).to match_snapshot("unauthenticated_user")
       end
+    end
+  end
+  describe "DELETE /destroy" do
+    it "responds with a successful status" do
+      delete session_url
+      expect(response).to be_successful
     end
   end
 end
