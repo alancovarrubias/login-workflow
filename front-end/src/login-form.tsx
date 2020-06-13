@@ -1,5 +1,6 @@
 import React from 'react'
 import {useFormik} from 'formik'
+import Api from './api'
 
 export interface LoginFormValues {
   username?: string
@@ -19,7 +20,13 @@ const validate = values => {
 }
 
 const loginHandler = (values: LoginFormValues): void => {
-  console.log(values)
+  const api = new Api()
+  console.log('sign up')
+  const ret = api.signUp(values.username, values.password).then(
+    res => console.log(res),
+    err => console.log(err),
+  )
+  console.log(ret)
 }
 const LoginForm = ({
   onSubmit = loginHandler,

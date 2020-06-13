@@ -11,9 +11,12 @@ interface Requester {
   get?: Function
   post?: Function
 }
+interface NbaData {
+  signUp: Function
+}
 export default class Api {
   constructor(private api: Requester = buildApi()) {}
-  signUp(username: string, password: string): Promise<string> {
+  public signUp(username: string, password: string): Promise<string> {
     return this.api.post('users', {username, password})
   }
 }
