@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 user_params = {id: 1, username: "TEST_USERNAME", password: "TEST_PASSWORD"}
-RSpec.describe "Sessions", type: :request do
+RSpec.describe "/sessions", type: :request do
   describe "POST /create" do
     context "with an authenticated user" do
       it "responds with a successful status" do

@@ -1,23 +1,30 @@
 import Api from '../index'
-import {createRequester} from '../requester'
 
 const mockRequester = {}
 jest.mock('../requester', () => ({
   createRequester: jest.fn(() => mockRequester),
 }))
-const username = 'TEST_USERNAME'
-const password = 'TEST_PASSWORD'
+const user = {username: 'TEST_USERNAME', password: 'TEST_PASSWORD'}
 describe('Api', () => {
-  describe('signUp', () => {
-    test('default requester', () => {
-      const api = new Api()
-      expect(api['requester']).toBe(mockRequester)
-      expect(createRequester).toHaveBeenCalled()
+  test('default requester', () => {
+    const api = new Api()
+    expect(api['requester']).toBe(mockRequester)
+  })
+  describe('login', () => {
+    test('post request is sent to sessions controller', async () => {
+      const mockRequester = {post: jest.fn()}
+      const api = new Api(mockRequester)
+      await api.login(user)
+      expect(mockRequester.post).toHaveBeenCalledWith('session', {user})
+      expect(mockRequester.post).toHaveBeenCalledTimes(1)
     })
+  })
+  describe('signUp', () => {
     test('post request is sent to users controller', async () => {
       const mockRequester = {post: jest.fn()}
       const api = new Api(mockRequester)
-      await api.signUp(username, password)
+      await api.signUp(user)
+      expect(mockRequester.post).toHaveBeenCalledWith('users', {user})
       expect(mockRequester.post).toHaveBeenCalledTimes(1)
     })
   })
