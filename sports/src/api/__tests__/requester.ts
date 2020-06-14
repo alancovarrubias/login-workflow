@@ -35,4 +35,9 @@ describe('createRequester', () => {
     const mockAxios = createRequester()
     expect(mockAxios.defaults.baseURL).toBe('http://localhost:3000')
   })
+  test('provided baseURL', async () => {
+    const baseURL = 'TEST_URL'
+    const mockAxios = createRequester(baseURL)
+    expect(mockAxios.defaults.baseURL).toBe(baseURL)
+  })
 })
