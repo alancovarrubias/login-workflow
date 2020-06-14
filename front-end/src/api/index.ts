@@ -1,4 +1,4 @@
-import createRequester from './requester'
+import {createRequester} from './requester'
 type Requester = {
   post?: Function
 }

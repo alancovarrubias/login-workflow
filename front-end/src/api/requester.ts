@@ -35,5 +35,3 @@ export const createRequester = (
   customAxios.defaults.baseURL = baseURL
   return customAxios
 }
-
-export default createRequester

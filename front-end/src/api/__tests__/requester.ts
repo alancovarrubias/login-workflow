@@ -31,9 +31,8 @@ describe('handleRequestFailure', () => {
 })
 
 describe('createRequester', () => {
-  test('returns custom requester object', async () => {
-    const baseURL = 'TEST_URL'
-    const mockAxios = createRequester(baseURL)
-    expect(mockAxios.defaults.baseURL).toBe(baseURL)
+  test('default baseURL', async () => {
+    const mockAxios = createRequester()
+    expect(mockAxios.defaults.baseURL).toBe('http://localhost:3000')
   })
 })
