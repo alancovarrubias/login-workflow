@@ -3,23 +3,11 @@ import MagicUser from '@testing-library/user-event'
 import {axe} from 'jest-axe'
 import {render, waitFor, act} from '@testing-library/react'
 import Auth from '../index'
-import {navigate} from '@reach/router'
 
 const defaultPath = '/login'
-jest.mock('../../api/', () => ({
-  AuthApi: {
-    signUp: jest.fn(() => Promise.resolve(null)),
-    login: jest.fn(() => Promise.resolve(null)),
-  },
-}))
-jest.mock('@reach/router', () => ({
-  navigate: jest.fn(),
-}))
-
 const username = 'TEST_USERNAME'
 const password = 'TEST_PASSWORD'
 const user = {username, password}
-
 type RenderAuthProps = {
   path?: string
   username?: string
@@ -38,7 +26,7 @@ describe('Auth', () => {
       expect(results).toHaveNoViolations()
     })
   })
-  describe('successful user login', () => {
+  describe('user form', () => {
     it('fills in the username', async () => {
       const {getByPlaceholderText} = renderAuth()
       const usernameInput = getByPlaceholderText('Enter Username')
@@ -70,19 +58,6 @@ describe('Auth', () => {
           await waitFor(() => {
             expect(onSubmit).toHaveBeenCalledTimes(1)
             expect(onSubmit).toHaveBeenCalledWith(defaultPath, user)
-          })
-        })
-      })
-      it('navigates to the home page', async () => {
-        const {getByRole} = renderAuth({
-          username,
-          password,
-        })
-        const submitButton = getByRole('button')
-        await act(async () => {
-          MagicUser.click(submitButton)
-          await waitFor(() => {
-            expect(navigate).toHaveBeenCalledWith('/home')
           })
         })
       })

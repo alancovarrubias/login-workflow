@@ -5,7 +5,8 @@ type Requester = {
 }
 class Api {
   constructor(private requester: Requester = createRequester()) {}
-  signUp = (user: User): Promise<string> => this.requester.post('users', {user})
+  register = (user: User): Promise<string> =>
+    this.requester.post('users', {user})
   login = (user: User): Promise<string> =>
     this.requester.post('session', {user})
 }

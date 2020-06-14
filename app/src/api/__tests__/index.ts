@@ -19,11 +19,11 @@ describe('Api', () => {
       expect(mockRequester.post).toHaveBeenCalledTimes(1)
     })
   })
-  describe('signUp', () => {
+  describe('register', () => {
     test('post request is sent to users controller', async () => {
       const mockRequester = {post: jest.fn()}
       const api = new Api(mockRequester)
-      await api.signUp(user)
+      await api.register(user)
       expect(mockRequester.post).toHaveBeenCalledWith('users', {user})
       expect(mockRequester.post).toHaveBeenCalledTimes(1)
     })

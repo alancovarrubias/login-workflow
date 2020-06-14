@@ -4,18 +4,25 @@ import {useFormik} from 'formik'
 import {validateForm} from './validate-form'
 import {AuthApi} from '../api'
 
-const getAuthApiMethod = (page: string) => {
-  const pageMethodMap = {
-    '/sign-up': 'signUp',
-    '/login': 'login',
-  }
-  return AuthApi[pageMethodMap[page]]
-}
-const handleSuccess = (): void => navigate('/home')
-const handleError = (): void => navigate('/error')
 export const submitForm = (page: string, user: User): void => {
+  const getAuthApiMethod = (page: string) => {
+    const pageMethodMap = {
+      '/register': 'register',
+      '/login': 'login',
+    }
+    return AuthApi[pageMethodMap[page]]
+  }
   const submitMethod = getAuthApiMethod(page)
+  const handleSuccess = (): void => navigate('/home')
+  const handleError = (): void => navigate('/error')
   submitMethod(user).then(handleSuccess, handleError)
+}
+const getHeader = (page: string) => {
+  const headerMap = {
+    '/register': 'Register',
+    '/login': 'Login',
+  }
+  return headerMap[page]
 }
 export type User = {
   id?: string
@@ -44,6 +51,7 @@ const Auth: React.FC<RouteComponentProps<AuthProps>> = ({
   })
   return (
     <React.Fragment>
+      <h2>{getHeader(path)}</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username</label>
         <input
