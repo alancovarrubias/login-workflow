@@ -2,10 +2,10 @@ import React from 'react'
 import {render, waitFor, act} from '@testing-library/react'
 import user from '@testing-library/user-event'
 import {axe} from 'jest-axe'
-import LoginForm from '../login-form'
+import Auth from '../auth'
 
-function renderLoginForm(props = {}) {
-  const utils = render(<LoginForm {...props} />)
+function renderAuth(props = {}) {
+  const utils = render(<Auth {...props} />)
   return {
     ...utils,
     ...props,
@@ -14,9 +14,9 @@ function renderLoginForm(props = {}) {
 
 const username = 'TEST_USERNAME'
 const password = 'TEST_PASSWORD'
-describe('LoginForm', () => {
+describe('Auth', () => {
   test('accessibility', async () => {
-    const {container} = renderLoginForm()
+    const {container} = renderAuth()
     await act(async () => {
       const results = await axe(container)
       expect(results).toHaveNoViolations()
@@ -24,7 +24,7 @@ describe('LoginForm', () => {
   })
   describe('user login', () => {
     it('fills in the username', async () => {
-      const {getByPlaceholderText} = renderLoginForm()
+      const {getByPlaceholderText} = renderAuth()
       const usernameInput = getByPlaceholderText('Enter Username')
       await act(async () => {
         await user.type(usernameInput, username)
@@ -32,7 +32,7 @@ describe('LoginForm', () => {
       })
     })
     it('fills in the password', async () => {
-      const {getByPlaceholderText} = renderLoginForm()
+      const {getByPlaceholderText} = renderAuth()
       const passwordInput = getByPlaceholderText('Enter Password')
       await act(async () => {
         await user.type(passwordInput, password)
@@ -41,7 +41,7 @@ describe('LoginForm', () => {
     })
     it('clicks the login button', async () => {
       const onSubmit = jest.fn()
-      const {getByRole, getByPlaceholderText} = renderLoginForm({
+      const {getByRole, getByPlaceholderText} = renderAuth({
         username,
         password,
         onSubmit,

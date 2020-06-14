@@ -1,19 +1,14 @@
-import Api from '../'
-import axios from 'axios'
-jest.mock('axios')
+import Api from '../index'
 
 const username = 'TEST_USERNAME'
 const password = 'TEST_PASSWORD'
 describe('Api', () => {
   describe('signUp', () => {
-    test('post request is sent to users controller', () => {
-      const api = new Api()
-      api.signUp(username, password)
-      expect(axios.post).toHaveBeenCalledTimes(1)
-      expect(axios.post).toHaveBeenCalledWith('users', {
-        username,
-        password,
-      })
+    test('post request is sent to users controller', async () => {
+      const mockRequester = {post: jest.fn()}
+      const api = new Api(mockRequester)
+      await api.signUp(username, password)
+      expect(mockRequester.post).toHaveBeenCalledTimes(1)
     })
   })
 })

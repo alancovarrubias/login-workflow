@@ -1,37 +1,37 @@
 import React from 'react'
+import {RouteComponentProps} from '@reach/router'
 import {useFormik} from 'formik'
 import Api from './api'
 
-export interface LoginFormValues {
-  username?: string
-  password?: string
-}
-
-interface OtherProps {
-  onSubmit?: (values: LoginFormValues) => void
-}
-
 const validate = values => {
-  const errors: LoginFormValues = {}
+  const errors: UserValues = {}
   if (!values.username) {
     errors.username = 'Required'
   }
   return errors
 }
 
-const loginHandler = (values: LoginFormValues): void => {
+const authHandler = (values: UserValues): void => {
   const api = new Api()
   api.signUp(values.username, values.password).then(res => console.log(res))
 }
-const LoginForm = ({
-  onSubmit = loginHandler,
+
+export interface UserValues {
+  username?: string
+  password?: string
+}
+interface AuthProps extends UserValues {
+  onSubmit?: (values: UserValues) => void
+}
+const Auth: React.FC<RouteComponentProps<AuthProps>> = ({
+  onSubmit = authHandler,
   username = '',
   password = '',
-}: OtherProps & LoginFormValues): JSX.Element => {
+}) => {
   const {values, handleChange, handleSubmit, isSubmitting} = useFormik({
     initialValues: {
-      username: username,
-      password: password,
+      username,
+      password,
     },
     validate,
     onSubmit: values => {
@@ -64,4 +64,4 @@ const LoginForm = ({
     </form>
   )
 }
-export default LoginForm
+export default Auth

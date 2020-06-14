@@ -20,6 +20,9 @@ module.exports = {
     },
     'import/resolver': 'node',
   },
+  rules: {
+    'react/prop-types': [0, {ignore: ['children']}],
+  },
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx'],

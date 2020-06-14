@@ -1,18 +1,13 @@
-import React, {FunctionComponent} from 'react'
-import {ThemeProvider} from 'emotion-theming'
-import {defaultTheme, themeOptionsMap, Theme} from './themes'
-import LoginForm from './login-form'
-import ThemePicker from './theme-picker'
+import React, {useState} from 'react'
+import Main from './main'
+import {ThemeProvider, defaultTheme} from './themes'
 
-const App: FunctionComponent<{}> = (): JSX.Element => {
-  const [theme, setTheme] = React.useState<Theme>(defaultTheme)
-  const handleThemeChange = event => setTheme(event.target.value)
+const App: React.FunctionComponent<{}> = () => {
+  const [theme, setTheme] = useState(defaultTheme)
   return (
     <React.Fragment>
-      <ThemeProvider theme={themeOptionsMap[theme]}>
-        <h1>Sports App</h1>
-        <LoginForm />
-        <ThemePicker theme={theme} onThemeChange={handleThemeChange} />
+      <ThemeProvider theme={theme} setTheme={setTheme}>
+        <Main />
       </ThemeProvider>
     </React.Fragment>
   )

@@ -1,10 +1,10 @@
 {
-  "baseUrl": ".",
-  "paths": {
-    "@test-utils/*": ["./test-utils"]
-  },
   "compilerOptions": {
-    "target": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "@test-utils/*": ["./test-utils/*"]
+    },
+    "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -13,7 +13,6 @@
     "removeComments": true,
     "sourceMap": true,
     "allowJs": true,
-    "jsx": "react",
     "noEmit": true
   }
 }

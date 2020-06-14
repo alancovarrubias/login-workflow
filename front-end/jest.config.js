@@ -1,10 +1,10 @@
 module.exports = {
-  collectCoverageFrom: ['<rootDir>/src/**/*.{js,jsx,ts,tsx}'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}'],
   coveragePathIgnorePatterns: ['<rootDir>/src/index.ts'],
   coverageThreshold: {
     global: {
       statements: 90,
-      branches: 90,
+      branches: 50,
       functions: 90,
       lines: 90,
     },
@@ -33,7 +33,6 @@ module.exports = {
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
     'jest-axe/extend-expect',
-    'module-alias/register',
   ],
   snapshotSerializers: ['jest-emotion'],
   testMatch: ['<rootDir>/src/**/__tests__/**/*.ts(x)?'],

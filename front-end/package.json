@@ -13,9 +13,11 @@
     "start": "serve --no-clipboard --single --listen 8080 dist",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|css|html|md)\"",
     "format": "npm run prettier -- --write",
+    "check": "npm run check-format && npm run check-types",
     "check-format": "npm run prettier -- --list-different",
+    "check-types": "tsc",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix --ignore-path .gitignore .eslintignore",
-    "validate": "npm run check-format && npm run test && npm run build",
+    "validate": "npm run check-types && npm run test:coverage && npm run build",
     "setup": "npm install && npm run validate"
   },
   "husky": {
@@ -25,7 +27,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "eslint --fix"
+      "npm run validate"
     ]
   },
   "license": "MIT",
@@ -53,9 +55,9 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
     "eslint": "^7.2.0",
-    "eslint-config-kentcdodds": "^14.13.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-jest": "^3.0.0",
+    "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.20.0",
     "file-loader": "^6.0.0",
@@ -68,9 +70,7 @@
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^0.6.0",
     "lint-staged": "^10.2.9",
-    "module-alias": "^2.2.2",
     "prettier": "^2.0.5",
-    "prop-types": "^15.7.2",
     "serve": "^11.3.2",
     "style-loader": "^1.2.1",
     "ts-jest": "^26.1.0",
@@ -82,6 +82,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "@reach/router": "^1.3.3",
     "axios": "^0.19.2",
     "emotion-theming": "^10.0.27",
     "formik": "^2.1.4",

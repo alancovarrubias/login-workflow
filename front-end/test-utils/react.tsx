@@ -1,22 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {render as rtlRender, RenderResult} from '@testing-library/react'
-import {ThemeProvider} from 'emotion-theming'
-import {Theme, themeOptionsMap} from '../src/themes'
+import {Theme, ThemeProvider, defaultTheme} from '../src/themes'
 
-export interface RenderOptions {
-  theme?: string
+export type RenderOptions = {
+  theme?: Theme
   [name: string]: {}
 }
-
-function render(
+const render = (
   ui: React.ReactElement,
-  {theme, ...options}: RenderOptions = {theme: Theme.DARK},
-): RenderResult {
+  {theme, ...options}: RenderOptions = {defaultTheme},
+): RenderResult => {
   function Wrapper({children}) {
-    return (
-      <ThemeProvider theme={themeOptionsMap[theme]}>{children}</ThemeProvider>
-    )
+    return <ThemeProvider theme={theme}>{children}</ThemeProvider>
   }
   Wrapper.propTypes = {
     children: PropTypes.node,
@@ -25,4 +21,5 @@ function render(
 }
 
 export * from '@testing-library/react'
+export * from '@testing-library/user-event'
 export {render}
