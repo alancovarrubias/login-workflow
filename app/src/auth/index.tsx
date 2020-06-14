@@ -1,9 +1,22 @@
 import React from 'react'
-import {RouteComponentProps} from '@reach/router'
+import {RouteComponentProps, navigate} from '@reach/router'
 import {useFormik} from 'formik'
 import {validateForm} from './validate-form'
-import {submitForm} from './submit-form'
+import {AuthApi} from '../api'
 
+const getAuthApiMethod = (page: string) => {
+  const pageMethodMap = {
+    '/sign-up': 'signUp',
+    '/login': 'login',
+  }
+  return AuthApi[pageMethodMap[page]]
+}
+const handleSuccess = (): void => navigate('/home')
+const handleError = (): void => navigate('/error')
+export const submitForm = (page: string, user: User): void => {
+  const submitMethod = getAuthApiMethod(page)
+  submitMethod(user).then(handleSuccess, handleError)
+}
 export type User = {
   id?: string
   username?: string
