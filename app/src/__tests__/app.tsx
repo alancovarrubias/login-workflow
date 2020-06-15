@@ -16,7 +16,7 @@ describe('App', () => {
     const {getByTestId} = renderApp()
     const displayContainer = getByTestId(TEST_IDS.displayContainer)
     const darkInput = getByTestId(
-      new RegExp(`theme-${Theme.DARK}`),
+      new RegExp(`theme-${Theme.Dark}`),
     ) as HTMLInputElement
     expect(darkInput).toBeChecked()
     expect(getComputedStyle(displayContainer).color).toBe(TEST_COLOR)
@@ -26,7 +26,7 @@ describe('App', () => {
     const {getByTestId} = renderApp()
     const displayContainer = getByTestId(TEST_IDS.displayContainer)
     const lightInput = getByTestId(
-      new RegExp(`theme-${Theme.LIGHT}`),
+      new RegExp(`theme-${Theme.Light}`),
     ) as HTMLInputElement
     user.click(lightInput)
     expect(lightInput).toBeChecked()

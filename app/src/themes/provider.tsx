@@ -3,17 +3,17 @@ import {ThemeProvider as EmotionThemeProvider} from 'emotion-theming'
 import {
   ThemeProps,
   ThemeContext,
-  emotionThemeValuesMap,
-  defaultTheme,
+  EmotionThemeValuesMap,
+  DefaultTheme,
 } from './index'
 
 export const ThemeProvider: React.FC<ThemeProps> = ({
-  theme = defaultTheme,
+  theme = DefaultTheme,
   setTheme,
   children,
 }) => {
   const contextValues = {theme, setTheme}
-  const emotionThemeValues = emotionThemeValuesMap[theme]
+  const emotionThemeValues = EmotionThemeValuesMap[String(theme)]
   return (
     <ThemeContext.Provider value={contextValues}>
       <EmotionThemeProvider theme={emotionThemeValues}>

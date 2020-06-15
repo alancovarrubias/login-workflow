@@ -1,30 +1,31 @@
 export enum Theme {
-  DARK = 'dark',
-  LIGHT = 'light',
+  Dark,
+  Light,
 }
-export const availableThemes: Theme[] = Object.values(Theme)
-export const defaultTheme: Theme = Theme.DARK
-export const nonDefaultTheme: Theme = Theme.LIGHT
-export const emotionThemeValuesMap: ThemeMap = {
-  [Theme.DARK]: {
-    displayTextColor: 'white',
-    displayBackgroundColor: '#1c191c',
+export type AvailableThemes = keyof typeof Theme
+export interface ThemeOptions {
+  color?: string
+  backgroundColor?: string
+}
+export interface ThemeMap {
+  [key: string]: ThemeOptions
+}
+export const DefaultTheme: Theme = Theme.Dark
+export const NonDefaultTheme: Theme = Theme.Light
+export const Themes = Object.keys(Theme).filter(
+  key => !isNaN((key as unknown) as number),
+)
+export const EmotionThemeValuesMap: ThemeMap = {
+  [Theme.Dark]: {
+    color: 'white',
+    backgroundColor: '#1c191c',
   },
-  [Theme.LIGHT]: {
-    displayTextColor: '#1c191c',
-    displayBackgroundColor: 'white',
+  [Theme.Light]: {
+    color: '#1c191c',
+    backgroundColor: 'white',
   },
 }
 
-export interface ThemeOptions {
-  displayTextColor?: string
-  displayBackgroundColor?: string
-}
-export interface ThemeMap {
-  theme?: ThemeOptions
-  [Theme.DARK]?: ThemeOptions
-  [Theme.LIGHT]?: ThemeOptions
-}
 export type ThemeProps = {
   theme: Theme
   setTheme?: React.Dispatch<React.SetStateAction<Theme>>

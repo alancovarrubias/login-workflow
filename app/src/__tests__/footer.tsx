@@ -1,7 +1,7 @@
 import React from 'react'
 import {render} from '@test-utils/theme'
 import Footer from '../footer'
-import {availableThemes, Theme} from '../themes'
+import {Themes, Theme} from '../themes'
 
 const ALL_THEMES = 'ALL'
 function renderFooter() {
@@ -19,6 +19,6 @@ describe('Footer', () => {
   it('renders inputs equal to the number of themes', () => {
     const {getThemeInputs} = renderFooter()
     const themeInputs = getThemeInputs(ALL_THEMES) as HTMLElement[]
-    expect(themeInputs.length).toBe(availableThemes.length)
+    expect(themeInputs.length).toBe(Themes.length)
   })
 })

@@ -18,7 +18,7 @@
     "check-types": "tsc",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix --ignore-path .gitignore .eslintignore",
     "validate": "npm run check && npm run lint && run test:coverage && npm run build",
-    "husky": "npm run jest",
+    "husky": "jest",
     "setup": "npm install && npm run validate"
   },
   "husky": {

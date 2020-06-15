@@ -1,9 +1,9 @@
 import React from 'react'
 import {render as rtlRender, RenderResult} from '@testing-library/react'
-import {Theme, ThemeProvider, defaultTheme} from '../src/themes'
+import {Theme, ThemeProvider, DefaultTheme} from '../src/themes'
 
 const defaultRenderOptions = {
-  theme: defaultTheme,
+  theme: DefaultTheme,
 }
 export type RenderOptions = {
   theme?: Theme
@@ -11,7 +11,7 @@ export type RenderOptions = {
 const render = (
   ui: React.ReactElement,
   {
-    theme = defaultTheme,
+    theme = DefaultTheme,
     ...renderOptions
   }: RenderOptions = defaultRenderOptions,
 ): RenderResult & RenderOptions => {

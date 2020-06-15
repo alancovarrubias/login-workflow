@@ -1,49 +1,37 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import {
-  Theme,
-  ThemeMap,
-  ThemeProps,
-  ThemeContext,
-  availableThemes,
-} from './themes'
+import {useTheme} from 'emotion-theming'
+import {Theme, ThemeProps, ThemeContext, Themes} from './themes'
 
-const DisplayContainer = styled.div(
-  {
-    input: {
-      cursor: 'pointer',
-    },
+const DisplayContainer = styled.div({
+  input: {
+    cursor: 'pointer',
   },
-  ({theme: {displayTextColor, displayBackgroundColor}}: ThemeMap) => ({
-    color: displayTextColor,
-    background: displayBackgroundColor,
-  }),
-)
+  marginTop: 30,
+})
 const Footer: React.FC<{}> = () => {
+  const theme = useTheme()
   const mapEvent = (themeContext: ThemeProps) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
-      const theme = event.target.value as Theme
+      const theme = Number(event.target.value)
       themeContext.setTheme(theme)
     }
   }
   return (
     <ThemeContext.Consumer>
       {themeContext => (
-        <DisplayContainer
-          data-testid="display-container"
-          style={{marginTop: 30}}
-        >
+        <DisplayContainer data-testid="display-container" style={theme}>
           <fieldset>
             <legend>Themes</legend>
-            {availableThemes.map((theme, index) => {
+            {Themes.map((theme, index) => {
               return (
                 <label key={index}>
-                  {` ${theme}`}
+                  {` ${Theme[theme]}`}
                   <input
                     id={`theme-${theme}`}
                     data-testid={`theme-${theme}`}
                     value={theme}
-                    checked={theme === themeContext.theme}
+                    checked={Number(theme) === themeContext.theme}
                     onChange={mapEvent(themeContext)}
                     type="radio"
                   />
