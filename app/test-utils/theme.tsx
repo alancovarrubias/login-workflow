@@ -5,16 +5,17 @@ import {Theme, ThemeProvider, DefaultTheme} from '../src/themes'
 const defaultRenderOptions = {
   theme: DefaultTheme,
 }
-export type RenderOptions = {
+export type ThemeRenderOptions = {
   theme?: Theme
 }
+export type ThemeRenderResult = ThemeRenderOptions & RenderResult
 const render = (
   ui: React.ReactElement,
   {
     theme = DefaultTheme,
     ...renderOptions
-  }: RenderOptions = defaultRenderOptions,
-): RenderResult & RenderOptions => {
+  }: ThemeRenderOptions = defaultRenderOptions,
+): ThemeRenderResult => {
   const Wrapper = ({children}) => (
     <ThemeProvider theme={theme}>{children}</ThemeProvider>
   )
