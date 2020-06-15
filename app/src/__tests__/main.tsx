@@ -1,11 +1,6 @@
-import React from 'react'
-import {render} from '@test-utils/router'
 import {Routes} from '../../utils/routes'
-import Main from '../main'
+import {renderMain} from './_utils'
 
-function renderMain() {
-  return render(<Main />)
-}
 describe('Main', () => {
   it('renders the login page', async () => {
     const {

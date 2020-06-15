@@ -10,18 +10,19 @@ type History = {
   location: {pathname: string}
   navigate: Function
 }
-export type RenderOptions = {
+export interface RouterRenderOptions {
   route?: string
   history?: History
 }
+export type RouterRenderResult = RouterRenderOptions & RenderResult
 const render = (
   ui: React.ReactElement,
   {
     route = '/',
     history = createHistory(createMemorySource(route)),
     ...renderOptions
-  }: RenderOptions = {},
-): RenderResult & RenderOptions => {
+  }: RouterRenderOptions = {},
+): RouterRenderResult => {
   const Wrapper = ({children}) => (
     <LocationProvider history={history}>{children}</LocationProvider>
   )

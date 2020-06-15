@@ -3,8 +3,7 @@ import {RouteComponentProps, navigate} from '@reach/router'
 import {useFormik} from 'formik'
 import {validateForm} from './validate-form'
 import {AuthApi} from '../api'
-import {Routes} from '../../utils/routes'
-import {DefaultPath} from './const'
+import {DefaultPath, Routes} from './const'
 
 export const submitForm = (page: string, user: User): void => {
   const getAuthApiMethod = (page: string) => {

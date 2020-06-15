@@ -1,11 +1,9 @@
-import React from 'react'
 import {navigate} from '@reach/router'
+import {waitFor, act} from '@testing-library/react'
 import MagicUser from '@testing-library/user-event'
-import {render, waitFor, act} from '@testing-library/react'
 import {ValidUser} from '@test-utils/fixtures/users'
-import Auth from '../index'
-import {Routes} from '../../../utils/routes'
-import {DefaultPath} from '..'
+import {renderAuth} from './_utils'
+import {Routes} from '../const'
 
 jest.mock('../../api/index', () => ({
   AuthApi: {
@@ -18,17 +16,6 @@ jest.mock('@reach/router', () => ({
 }))
 
 const {username, password} = ValidUser
-
-type RenderAuthProps = {
-  path?: string
-  username?: string
-  password?: string
-  onSubmit?: Function
-}
-const renderAuth = (
-  {path = DefaultPath, ...restOfProps}: RenderAuthProps = {path: DefaultPath},
-) => render(<Auth path={path} {...restOfProps} />)
-
 describe('Unsuccessful user login', () => {
   describe('submitting the form', () => {
     it('navigates to the error page', async () => {

@@ -29,11 +29,12 @@ module.exports = {
     'jest-watch-typeahead/testname',
   ],
   preset: 'ts-jest',
-  rootDir: __dirname,
+  rootDir: '.',
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
     'jest-axe/extend-expect',
   ],
   snapshotSerializers: ['jest-emotion'],
   testMatch: ['<rootDir>/src/**/__tests__/**/*.ts(x)?'],
+  testPathIgnorePatterns: ['_utils'],
 }

@@ -1,35 +1,26 @@
-import React from 'react'
-import {render} from '@testing-library/react'
-import user from '@testing-library/user-event'
-import App from '../app'
+import MagicUser from '@testing-library/user-event'
+import {renderApp, TestIdMap, TestColor} from './_utils'
 import {Theme} from '../themes'
 
-const TEST_COLOR = 'white'
-const TEST_IDS = {
-  displayContainer: 'display-container',
-}
-const renderApp = () => {
-  return render(<App />)
-}
 describe('App', () => {
   it('renders dark theme by default', () => {
     const {getByTestId} = renderApp()
-    const displayContainer = getByTestId(TEST_IDS.displayContainer)
+    const displayContainer = getByTestId(TestIdMap.displayContainer)
     const darkInput = getByTestId(
       new RegExp(`theme-${Theme.Dark}`),
     ) as HTMLInputElement
     expect(darkInput).toBeChecked()
-    expect(getComputedStyle(displayContainer).color).toBe(TEST_COLOR)
+    expect(getComputedStyle(displayContainer).color).toBe(TestColor)
   })
 
   it('switches themes when light input is clicked', () => {
     const {getByTestId} = renderApp()
-    const displayContainer = getByTestId(TEST_IDS.displayContainer)
+    const displayContainer = getByTestId(TestIdMap.displayContainer)
     const lightInput = getByTestId(
       new RegExp(`theme-${Theme.Light}`),
     ) as HTMLInputElement
-    user.click(lightInput)
+    MagicUser.click(lightInput)
     expect(lightInput).toBeChecked()
-    expect(getComputedStyle(displayContainer).backgroundColor).toBe(TEST_COLOR)
+    expect(getComputedStyle(displayContainer).backgroundColor).toBe(TestColor)
   })
 })
