@@ -20,6 +20,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'ts', 'tsx'],
   moduleNameMapper: {
     '@test-utils/(.*)': '<rootDir>/test-utils/$1',
+    '@utils/(.*)': '<rootDir>/utils/$1',
     '\\.module\\.css$': 'identity-obj-proxy',
     '\\.css$': require.resolve('./test/style-mock.js'),
   },

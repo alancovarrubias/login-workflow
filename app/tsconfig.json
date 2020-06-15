@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@utils/*": ["./utils/*"],
-      "@test-utils/*": ["./test-utils/*"]
+      "@test-utils/*": ["./test-utils/*"],
+      "@utils/*": ["./utils/*"]
     },
     "jsx": "react",
     "module": "commonjs",

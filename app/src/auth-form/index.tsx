@@ -1,19 +1,31 @@
 import React from 'react'
 import {RouteComponentProps, navigate} from '@reach/router'
+import {Routes} from '@utils/routes'
+import User from '@utils/models/user'
 import {useFormik} from 'formik'
-import {validateForm} from './validate-form'
-import {AuthApi} from '../api'
-import {DefaultPath, Routes} from './const'
+import {AuthFormApi} from '../api'
+import {DefaultPath} from './const'
+
+export const validateForm = (user: User): Partial<User> => {
+  const errors: Partial<User> = {}
+  if (!user.username) {
+    errors.username = 'Required'
+  }
+  if (!user.password) {
+    errors.password = 'Required'
+  }
+  return errors
+}
 
 export const submitForm = (page: string, user: User): void => {
-  const getAuthApiMethod = (page: string) => {
+  const getAuthFormApiMethod = (page: string) => {
     const pageMethodMap = {
       [Routes.Register]: 'register',
       [Routes.Login]: 'login',
     }
-    return AuthApi[pageMethodMap[page]]
+    return AuthFormApi[pageMethodMap[page]]
   }
-  const submitMethod = getAuthApiMethod(page)
+  const submitMethod = getAuthFormApiMethod(page)
   const handleSuccess = (): void => navigate(Routes.Home)
   const handleError = (): void => navigate(Routes.Error)
   submitMethod(user).then(handleSuccess, handleError)
@@ -25,22 +37,14 @@ const getHeader = (page: string) => {
   }
   return headerMap[page]
 }
-export type User = {
-  id?: string
-  username?: string
-  password?: string
-}
-export type UserBody = {
-  user: User
-}
-interface AuthProps extends User {
+
+interface AuthFormProps extends User {
   onSubmit: (user: User) => void
 }
-const Auth: React.FC<RouteComponentProps<AuthProps>> = ({
+const AuthForm: React.FC<RouteComponentProps<AuthFormProps>> = ({
   path = DefaultPath,
   username = '',
   password = '',
-  onSubmit = submitForm,
 }) => {
   const {values, handleChange, handleSubmit, isSubmitting} = useFormik({
     initialValues: {
@@ -48,7 +52,7 @@ const Auth: React.FC<RouteComponentProps<AuthProps>> = ({
       password,
     },
     validate: validateForm,
-    onSubmit: (user: User) => onSubmit(path, user),
+    onSubmit: (user: User) => submitForm(path, user),
   })
   return (
     <React.Fragment>
@@ -79,6 +83,6 @@ const Auth: React.FC<RouteComponentProps<AuthProps>> = ({
     </React.Fragment>
   )
 }
-export default Auth
+export default AuthForm
 
 export * from './const'

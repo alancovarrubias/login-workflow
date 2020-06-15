@@ -1,5 +1,6 @@
+import User from '@utils/models/user'
 import {createRequester} from './requester'
-import {User} from '../auth'
+
 type Requester = {
   post?: Function
 }
@@ -11,5 +12,5 @@ class Api {
     this.requester.post('session', {user})
 }
 
-export const AuthApi = new Api()
+export const AuthFormApi = new Api()
 export default Api

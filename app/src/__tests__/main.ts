@@ -1,4 +1,4 @@
-import {Routes} from '../../utils/routes'
+import {Routes} from '@utils/routes'
 import {renderMain} from './_utils'
 
 describe('Main', () => {
