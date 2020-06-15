@@ -2,7 +2,11 @@ import {Routes} from '@utils/routes'
 import {renderMain} from './_utils'
 
 describe('Main', () => {
-  it('renders the login page', async () => {
+  it('renders the login page by default', async () => {
+    const {container} = renderMain()
+    expect(container).toHaveTextContent(/login/i)
+  })
+  it('/login renders the login page', async () => {
     const {
       container,
       history: {navigate},
@@ -10,7 +14,7 @@ describe('Main', () => {
     await navigate(Routes.Login)
     expect(container).toHaveTextContent(/login/i)
   })
-  it('renders the register page', async () => {
+  it('/register renders the register page', async () => {
     const {
       container,
       history: {navigate},
@@ -18,7 +22,7 @@ describe('Main', () => {
     await navigate(Routes.Register)
     expect(container).toHaveTextContent(/register/i)
   })
-  it('renders the home page', async () => {
+  it('/home renders the home page', async () => {
     const {
       container,
       history: {navigate},
@@ -26,7 +30,7 @@ describe('Main', () => {
     await navigate(Routes.Home)
     expect(container).toHaveTextContent(/home/i)
   })
-  it('renders the error page', async () => {
+  it('/error renders the error page', async () => {
     const {
       container,
       history: {navigate},

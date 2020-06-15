@@ -1,6 +1,7 @@
+/* istanbul ignore file */
 import React from 'react'
 import {render, RenderResult} from '@testing-library/react'
-import AuthForm from '..'
+import AuthForm from '../index'
 
 type RenderAuthFormProps = {
   path?: string

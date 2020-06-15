@@ -1,10 +1,10 @@
 import React from 'react'
 import {ThemeProvider as EmotionThemeProvider} from 'emotion-theming'
-import {ThemeProps, EmotionThemeValues, DefaultTheme} from './const'
+import {ThemeProps, EmotionThemeValues} from './const'
 import {ThemeContext} from './context'
 
 export const ThemeProvider: React.FC<ThemeProps> = ({
-  theme = DefaultTheme,
+  theme,
   setTheme,
   children,
 }) => {

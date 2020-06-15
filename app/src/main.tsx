@@ -7,9 +7,9 @@ import Error from './error'
 const Main: React.FC<{}> = () => {
   return (
     <Router>
-      <Home path="/home" />
-      <AuthForm path="/login" />
+      <AuthForm path="/login" default />
       <AuthForm path="/register" />
+      <Home path="/home" />
       <Error path="/error" />
     </Router>
   )
