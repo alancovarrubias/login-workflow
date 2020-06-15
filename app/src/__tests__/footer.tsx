@@ -1,5 +1,5 @@
 import React from 'react'
-import {render} from '../../test-utils/theme'
+import {render} from '@test-utils/theme'
 import Footer from '../footer'
 import {availableThemes, Theme} from '../themes'
 

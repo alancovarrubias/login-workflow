@@ -1,11 +1,7 @@
 import React from 'react'
-import {render} from '../../test-utils/router'
+import {render} from '@test-utils/router'
 import Main from '../main'
 
-const TEST_COLOR = 'white'
-const TEST_IDS = {
-  displayContainer: 'display-container',
-}
 function renderMain() {
   return render(<Main />)
 }

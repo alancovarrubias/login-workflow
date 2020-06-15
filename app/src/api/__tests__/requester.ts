@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from 'axios'
+import {AxiosResponse} from 'axios'
 import {getData, handleRequestFailure, createRequester} from '../requester'
 
 jest.mock('axios', () => ({

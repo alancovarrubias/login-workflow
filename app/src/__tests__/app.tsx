@@ -8,7 +8,7 @@ const TEST_COLOR = 'white'
 const TEST_IDS = {
   displayContainer: 'display-container',
 }
-function renderApp() {
+const renderApp = () => {
   return render(<App />)
 }
 describe('App', () => {

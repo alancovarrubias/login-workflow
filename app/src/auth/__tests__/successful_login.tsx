@@ -1,6 +1,5 @@
 import React from 'react'
 import MagicUser from '@testing-library/user-event'
-import {axe} from 'jest-axe'
 import {render, waitFor, act} from '@testing-library/react'
 import Auth from '../index'
 import {navigate} from '@reach/router'
@@ -18,7 +17,6 @@ jest.mock('@reach/router', () => ({
 
 const username = 'TEST_USERNAME'
 const password = 'TEST_PASSWORD'
-const user = {username, password}
 
 type RenderAuthProps = {
   path?: string
