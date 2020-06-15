@@ -2,21 +2,17 @@ import React from 'react'
 import MagicUser from '@testing-library/user-event'
 import {axe} from 'jest-axe'
 import {render, waitFor, act} from '@testing-library/react'
-import Auth from '../index'
+import {ValidUser} from '@test-utils/fixtures/users'
+import Auth, {DefaultPath} from '..'
 
-const defaultPath = '/login'
-const username = 'TEST_USERNAME'
-const password = 'TEST_PASSWORD'
-const user = {username, password}
+const {username, password} = ValidUser
 type RenderAuthProps = {
   path?: string
   username?: string
   password?: string
   onSubmit?: Function
 }
-const renderAuth = (
-  {path = defaultPath, ...restOfProps}: RenderAuthProps = {path: defaultPath},
-) => render(<Auth path={path} {...restOfProps} />)
+const renderAuth = (props: RenderAuthProps = {}) => render(<Auth {...props} />)
 
 describe('Auth', () => {
   test('accessibility', async () => {
@@ -57,7 +53,7 @@ describe('Auth', () => {
           MagicUser.click(submitButton)
           await waitFor(() => {
             expect(onSubmit).toHaveBeenCalledTimes(1)
-            expect(onSubmit).toHaveBeenCalledWith(defaultPath, user)
+            expect(onSubmit).toHaveBeenCalledWith(DefaultPath, ValidUser)
           })
         })
       })

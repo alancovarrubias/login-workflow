@@ -1,10 +1,10 @@
 import React from 'react'
+import {navigate} from '@reach/router'
 import MagicUser from '@testing-library/user-event'
 import {render, waitFor, act} from '@testing-library/react'
+import {ValidUser} from '@test-utils/fixtures/users'
 import Auth from '../index'
-import {navigate} from '@reach/router'
 
-const defaultPath = '/login'
 jest.mock('../../api/index', () => ({
   AuthApi: {
     login: jest.fn(() => Promise.resolve(null)),
@@ -15,8 +15,8 @@ jest.mock('@reach/router', () => ({
   navigate: jest.fn(),
 }))
 
-const username = 'TEST_USERNAME'
-const password = 'TEST_PASSWORD'
+const defaultPath = '/login'
+const {username, password} = ValidUser
 
 type RenderAuthProps = {
   path?: string
@@ -29,7 +29,7 @@ const renderAuth = (
 ) => render(<Auth path={path} {...restOfProps} />)
 
 describe('Successful user login', () => {
-  describe('clicking the button', () => {
+  describe('submitting the form', () => {
     it('navigates to the home page', async () => {
       const {getByRole} = renderAuth({
         username,

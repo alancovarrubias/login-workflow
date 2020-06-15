@@ -3,24 +3,26 @@ import {RouteComponentProps, navigate} from '@reach/router'
 import {useFormik} from 'formik'
 import {validateForm} from './validate-form'
 import {AuthApi} from '../api'
+import {Routes} from '../../utils/routes'
+import {DefaultPath} from './const'
 
 export const submitForm = (page: string, user: User): void => {
   const getAuthApiMethod = (page: string) => {
     const pageMethodMap = {
-      '/register': 'register',
-      '/login': 'login',
+      [Routes.Register]: 'register',
+      [Routes.Login]: 'login',
     }
     return AuthApi[pageMethodMap[page]]
   }
   const submitMethod = getAuthApiMethod(page)
-  const handleSuccess = (): void => navigate('/home')
-  const handleError = (): void => navigate('/error')
+  const handleSuccess = (): void => navigate(Routes.Home)
+  const handleError = (): void => navigate(Routes.Error)
   submitMethod(user).then(handleSuccess, handleError)
 }
 const getHeader = (page: string) => {
   const headerMap = {
-    '/register': 'Register',
-    '/login': 'Login',
+    [Routes.Register]: 'Register',
+    [Routes.Login]: 'Login',
   }
   return headerMap[page]
 }
@@ -36,7 +38,7 @@ interface AuthProps extends User {
   onSubmit: (user: User) => void
 }
 const Auth: React.FC<RouteComponentProps<AuthProps>> = ({
-  path,
+  path = DefaultPath,
   username = '',
   password = '',
   onSubmit = submitForm,
@@ -79,3 +81,5 @@ const Auth: React.FC<RouteComponentProps<AuthProps>> = ({
   )
 }
 export default Auth
+
+export * from './const'
