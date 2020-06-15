@@ -6,7 +6,7 @@ import {useFormik} from 'formik'
 import {AuthFormApi} from '../api'
 import {DefaultPath} from './const'
 
-export const validateForm = (user: User): Partial<User> => {
+const validateForm = (user: User): Partial<User> => {
   const errors: Partial<User> = {}
   if (!user.username) {
     errors.username = 'Required'
@@ -17,8 +17,8 @@ export const validateForm = (user: User): Partial<User> => {
   return errors
 }
 
-export const submitForm = (page: string, user: User): void => {
-  const getAuthFormApiMethod = (page: string) => {
+const submitForm = (page: Routes, user: User): void => {
+  const getAuthFormApiMethod = (page: Routes) => {
     const pageMethodMap = {
       [Routes.Register]: 'register',
       [Routes.Login]: 'login',
@@ -30,7 +30,7 @@ export const submitForm = (page: string, user: User): void => {
   const handleError = (): void => navigate(Routes.Error)
   submitMethod(user).then(handleSuccess, handleError)
 }
-const getHeader = (page: string) => {
+const getHeader = (page: Routes) => {
   const headerMap = {
     [Routes.Register]: 'Register',
     [Routes.Login]: 'Login',
@@ -38,10 +38,7 @@ const getHeader = (page: string) => {
   return headerMap[page]
 }
 
-interface AuthFormProps extends User {
-  onSubmit: (user: User) => void
-}
-const AuthForm: React.FC<RouteComponentProps<AuthFormProps>> = ({
+const AuthForm: React.FC<RouteComponentProps<User>> = ({
   path = DefaultPath,
   username = '',
   password = '',

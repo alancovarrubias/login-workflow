@@ -41,8 +41,7 @@ describe('AuthForm', () => {
         expect(submitButton).toBeEnabled()
         await act(async () => {
           MagicUser.click(submitButton)
-          await waitFor(() => {
-          })
+          expect(submitForm).toHaveBeenCalled()
         })
       })
     })
