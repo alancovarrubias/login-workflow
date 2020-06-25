@@ -3,3 +3,5 @@ dist
 yarn-error.log
 coverage
 src/**/__tests__/**/*.js 
+cypress/videos
+cypress/screenshots
