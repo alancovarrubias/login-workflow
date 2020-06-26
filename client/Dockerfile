@@ -1,10 +1,10 @@
 FROM node:14.4.0
 
 # set working directory
-WORKDIR /app
+WORKDIR /client
 
 # add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH /client/node_modules/.bin:$PATH
 
 # install app dependencies
 COPY package.json ./
