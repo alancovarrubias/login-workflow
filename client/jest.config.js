@@ -13,8 +13,7 @@ module.exports = {
     },
   },
   moduleNameMapper: {
-    '@test-utils/(.*)': '<rootDir>/test-utils/$1',
-    '@utils/(.*)': '<rootDir>/utils/$1',
+    ...pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>/'}),
     '\\.module\\.css$': 'identity-obj-proxy',
     '\\.css$': require.resolve('./test/style-mock.js'),
   },
