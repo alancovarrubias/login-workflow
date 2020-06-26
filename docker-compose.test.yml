@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+  web-test:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.test
