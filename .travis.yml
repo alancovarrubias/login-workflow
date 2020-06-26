@@ -11,3 +11,7 @@ matrix:
     - language: ruby
       before_install: cd auth
       script: bundle exec rspec
+
+cache:
+  directories:
+    - ~/.cache

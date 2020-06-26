@@ -87,6 +87,7 @@
     "serve": "^11.3.2",
     "start-server-and-test": "^1.11.0",
     "style-loader": "^1.2.1",
+    "test-data-bot": "^0.8.0",
     "ts-jest": "^26.1.0",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0",
