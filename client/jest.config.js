@@ -1,3 +1,6 @@
+const {pathsToModuleNameMapper} = require('ts-jest/utils')
+const {compilerOptions} = require('./tsconfig')
+
 module.exports = {
   collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}'],
   coveragePathIgnorePatterns: ['<rootDir>/src/index.ts'],
@@ -9,15 +12,6 @@ module.exports = {
       lines: 90,
     },
   },
-  globals: {
-    'ts-jest': {
-      diagnostics: {
-        warnOnly: true,
-      },
-      tsConfig: 'tsconfig.json',
-    },
-  },
-  moduleFileExtensions: ['js', 'ts', 'tsx'],
   moduleNameMapper: {
     '@test-utils/(.*)': '<rootDir>/test-utils/$1',
     '@utils/(.*)': '<rootDir>/utils/$1',
@@ -31,10 +25,7 @@ module.exports = {
   ],
   preset: 'ts-jest',
   rootDir: '.',
-  setupFilesAfterEnv: [
-    '@testing-library/jest-dom/extend-expect',
-    'jest-axe/extend-expect',
-  ],
+  setupFilesAfterEnv: ['./jest.setup.ts'],
   snapshotSerializers: ['jest-emotion'],
   testMatch: ['<rootDir>/src/**/__tests__/**/*.ts(x)?'],
   testPathIgnorePatterns: ['_utils'],

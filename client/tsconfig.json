@@ -8,14 +8,14 @@
     "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
-    "esModuleInterop": true,
     "noResolve": false,
     "noImplicitAny": false,
     "removeComments": true,
     "sourceMap": true,
     "allowJs": true,
     "noEmit": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true
   },
-  "exclude": ["**/__tests__/*"]
+  "include": ["src/**/*"]
 }
