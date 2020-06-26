@@ -6,7 +6,6 @@ matrix:
   include:
     - language: node_js
       before_install: cd front-end
-      install: npm ci
       script: npm run validate
 
     - language: ruby
