@@ -7,28 +7,37 @@
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "test:e2e": "is-ci \"test:e2e:run\" \"test:e2e:dev\"",
+    "pretest:e2e:run": "npm run build",
+    "test:e2e:run": "start-server-and-test start http://localhost:8080 cy:run",
+    "test:e2e:dev": "start-server-and-test dev http://localhost:8080 cy:open",
     "dev": "webpack-dev-server --host=0.0.0.0 --mode=development",
     "build": "webpack --mode=production",
     "postbuild": "cp ./public/index.html ./dist/index.html",
-    "start": "serve --no-clipboard --single --listen 8080 dist",
+    "start": "npm-run-all --parallel start:*",
+    "start:client": "serve --no-clipboard --single --listen 8080 dist",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|css|html|md)\"",
     "format": "npm run prettier -- --write",
     "check": "npm run check-format && npm run check-types",
     "check-format": "npm run prettier -- --list-different",
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix --ignore-path .gitignore .eslintignore",
-    "validate": "npm run check && npm run lint && run test:coverage && npm run build",
+    "validate": "npm run test:coverage && npm run test:e2e:run",
     "husky": "jest",
     "setup": "npm install && npm run validate"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && npm run test:e2e:run"
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "npm run husky"
+    "**/*.+(js|json|jsx|ts|tsx|css|html|md)": [
+      "prettier",
+      "jest --findRelatedTests",
+      "git add"
     ]
   },
   "license": "MIT",
@@ -40,6 +49,7 @@
     "@babel/preset-typescript": "^7.10.1",
     "@babel/runtime": "^7.10.2",
     "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@testing-library/cypress": "^6.0.0",
     "@testing-library/dom": "^7.12.0",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^10.2.1",
@@ -73,8 +83,10 @@
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^0.6.0",
     "lint-staged": "^10.2.9",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
     "serve": "^11.3.2",
+    "start-server-and-test": "^1.11.0",
     "style-loader": "^1.2.1",
     "ts-jest": "^26.1.0",
     "typescript": "^3.9.5",
