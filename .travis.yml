@@ -1,13 +1,23 @@
 sudo: false
-language: node_js
 addons:
   apt:
     packages:
       - libgconf-2-4
+matrix:
+  include:
+    - language: node_js
+      before_script:
+        - cd front-end
+
+    - language: ruby
+      before_script:
+        - cd auth
+      script: rspec
+
+notifications:
+  email:
+    - aecovarru@gmail.com
 cache:
   directories:
     - ~/.npm
     - ~/.cache
-notifications:
-  email: false
-node_js: "12"
