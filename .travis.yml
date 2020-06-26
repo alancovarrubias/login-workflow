@@ -6,11 +6,11 @@ addons:
 matrix:
   include:
     - language: node_js
-      before_script:
+      before_install:
         - cd front-end
 
     - language: ruby
-      before_script:
+      before_install:
         - cd auth
       script: rspec
 
