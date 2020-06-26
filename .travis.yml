@@ -10,4 +10,4 @@ matrix:
 
     - language: ruby
       before_install: cd auth
-      script: rspec
+      script: bundle exec rspec
