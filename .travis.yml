@@ -8,6 +8,8 @@ matrix:
     - language: node_js
       before_install:
         - cd front-end
+      install:
+        - yarn install --frozen-lockfile --silent
 
     - language: ruby
       before_install:
