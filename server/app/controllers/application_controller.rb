@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
-
   rescue_from ActiveRecord::RecordNotFound do |e|
     render json: { error: "Not Found" }, status: :not_found
   end

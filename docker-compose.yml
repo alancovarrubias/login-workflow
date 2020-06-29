@@ -18,7 +18,7 @@ services:
       POSTGRES_PASSWORD: password
   api:
     build: ./server
-    command: bash -c 'rake db:setup && rake server:start'
+    command: bash -c 'rake db:build && rake server:start'
     volumes:
       - ./server:/server
     ports:
