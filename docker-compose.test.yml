@@ -1,7 +1,24 @@
 version: "3.7"
 
 services:
-  web-test:
+  client-test:
     build:
-      context: ./client
-      dockerfile: Dockerfile.test
+      context: .
+      dockerfile: Dockerfile.client.test
+    volumes:
+      - .:/app
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  server-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.server.test
+    command: bash -c 'rake db:build'
+    volumes:
+      - ./server:/server
+    depends_on:
+      - db

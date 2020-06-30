@@ -1,9 +1,0 @@
-FROM ruby:2.7.1
-
-ENV INSTALL_PATH /opt/app
-RUN mkdir -p $INSTALL_PATH
-
-RUN gem install rails bundler
-WORKDIR /opt/app
-
-CMD ["/bin/sh"]
