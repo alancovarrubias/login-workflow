@@ -5,11 +5,11 @@ addons:
 matrix:
   include:
     - language: node_js
-      before_install: cd front-end
+      before_install: cd client
       script: npm run validate
 
     - language: ruby
-      before_install: cd auth
+      before_install: cd server
       script: bundle exec rspec
 
 cache:
