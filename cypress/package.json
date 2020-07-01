@@ -1,0 +1,23 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "cy:run": "cypress run",
+    "cy:open": "cypress open"
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^6.0.0",
+    "cypress": "^4.9.0",
+    "eslint": "^7.2.0",
+    "eslint-plugin-cypress": "^2.11.1",
+    "test-data-bot": "^0.8.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

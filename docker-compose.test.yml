@@ -4,7 +4,8 @@ services:
   client-test:
     build:
       context: .
-      dockerfile: Dockerfile.client.test
+      dockerfile: ./Dockerfile.client.test
+    command: bash -c 'yarn test:inband'
     volumes:
       - .:/app
   db:
@@ -16,9 +17,16 @@ services:
   server-test:
     build:
       context: .
-      dockerfile: Dockerfile.server.test
-    command: bash -c 'rake db:build'
+      dockerfile: ./Dockerfile.server.test
+    command: bash -c 'rake db:build && rake test:run'
     volumes:
       - ./server:/server
     depends_on:
       - db
+  cypress:
+    command: ./node_modules/.bin/cypress run
+    build:
+      context: .
+      dockerfile: ./cypress/Dockerfile.cypress
+    volumes:
+      - ./cypress/:/e2e/cypress
