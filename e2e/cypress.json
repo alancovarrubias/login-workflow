@@ -1,5 +1,5 @@
 {
   "baseUrl": "http://host.docker.internal:8080",
   "integrationFolder": "cypress/e2e",
-  "videoCompression": false
+  "video": false
 }

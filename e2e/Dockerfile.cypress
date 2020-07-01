@@ -2,9 +2,9 @@ FROM cypress/base:12
 
 WORKDIR /e2e
 # Copy files for config
-COPY ./cypress/cypress.json .
-COPY ./cypress/package.json .
-RUN yarn --silent
+COPY ./e2e/package.json .
+COPY ./e2e/yarn.lock .
+RUN yarn
 
 # Run tests
 CMD ["./node_modules/.bin/cypress", "run" ]
