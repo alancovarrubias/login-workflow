@@ -18,7 +18,7 @@ jest.mock('@reach/router', () => ({
 
 describe('Successful user login', () => {
   describe('submitting the form', () => {
-    it('navigates to the home page', async () => {
+    it('navigates to the home page and adds user to local storage', async () => {
       const {getByRole} = renderAuthForm({
         username,
         password,

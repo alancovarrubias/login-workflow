@@ -1,11 +1,12 @@
 /* istanbul ignore file */
 import React from 'react'
-import {render as rtlRender} from '@testing-library/react'
+import {render as rtlRender, RenderResult} from '@testing-library/react'
 import {render as routerRender, RouterRenderResult} from '@test-utils/router'
 import {render as themeRender, ThemeRenderResult} from '@test-utils/theme'
 
 import App from '../app'
 import Main from '../main'
+import Home from '../home'
 import Footer from '../footer'
 import {Theme} from '../themes'
 import {TargetElement} from '@testing-library/user-event'
@@ -34,7 +35,8 @@ const createThemeInputsMethod = (utils): ThemeInputsMethod => theme =>
   themeInputsMethod(utils, theme)
 
 type ThemeInputsMethodContainer = {themeInputs: ThemeInputsMethod}
-type AppRenderResult = RouterRenderResult & ThemeInputsMethodContainer
+
+type AppRenderResult = ThemeInputsMethodContainer & RenderResult
 export const renderApp = (): AppRenderResult => {
   const utils = rtlRender(<App />)
   const themeInputs = createThemeInputsMethod(utils)
@@ -43,10 +45,20 @@ export const renderApp = (): AppRenderResult => {
     themeInputs,
   }
 }
+
 type MainRenderResult = RouterRenderResult
 export const renderMain = (): MainRenderResult => {
   return routerRender(<Main />)
 }
+
+type HomeRenderResult = RouterRenderResult
+export const renderHome = (): HomeRenderResult => {
+  const utils = routerRender(<Home />)
+  return {
+    ...utils,
+  }
+}
+
 type FooterRenderResult = ThemeRenderResult & ThemeInputsMethodContainer
 export const renderFooter = (): FooterRenderResult => {
   const utils = themeRender(<Footer />)
