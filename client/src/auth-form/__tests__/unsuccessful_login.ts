@@ -1,16 +1,17 @@
 import {navigate} from '@reach/router'
 import {waitFor, act} from '@testing-library/react'
 import MagicUser from '@testing-library/user-event'
-import {ValidUser} from '@test-utils/fixtures/users'
+import {ValidUser} from '@test-utils/fixtures/user'
 import {Routes} from '@utils/routes'
 import {renderAuthForm} from './_utils'
 
-jest.mock('../../api/index', () => ({
+jest.mock('../../api', () => ({
   AuthFormApi: {
     login: jest.fn(() => Promise.reject(null)),
     register: jest.fn(() => Promise.reject(null)),
   },
 }))
+
 jest.mock('@reach/router', () => ({
   navigate: jest.fn(),
 }))
@@ -25,9 +26,10 @@ describe('Unsuccessful user login', () => {
       })
       const submitButton = getByRole('button')
       await act(async () => {
-        MagicUser.click(submitButton)
+        await MagicUser.click(submitButton)
         await waitFor(() => {
           expect(navigate).toHaveBeenCalledWith(Routes.Error)
+          expect(navigate).toHaveBeenCalledTimes(1)
         })
       })
     })

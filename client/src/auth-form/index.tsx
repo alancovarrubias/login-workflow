@@ -17,7 +17,7 @@ const validateForm = (user: User): Partial<User> => {
   return errors
 }
 
-const submitForm = (page: Routes, user: User): void => {
+const submitForm = (page: Routes, user: User): Promise<string> => {
   const getAuthFormApiMethod = (page: Routes) => {
     const pageMethodMap = {
       [Routes.Register]: 'register',
@@ -26,12 +26,7 @@ const submitForm = (page: Routes, user: User): void => {
     return AuthFormApi[pageMethodMap[page]]
   }
   const submitMethod = getAuthFormApiMethod(page)
-  const handleSuccess = ({user}): void => {
-    localStorage.setItem('user', JSON.stringify(user))
-    navigate(Routes.Home)
-  }
-  const handleError = (): void => navigate(Routes.Error)
-  submitMethod(user).then(handleSuccess, handleError)
+  return submitMethod(user)
 }
 const getHeader = (page: Routes) => {
   const headerMap = {
@@ -52,7 +47,14 @@ const AuthForm: React.FC<RouteComponentProps<User>> = ({
       password,
     },
     validate: validateForm,
-    onSubmit: (user: User) => submitForm(path, user),
+    onSubmit: async (user: User) => {
+      try {
+        await submitForm(path, user)
+        navigate(Routes.Home)
+      } catch (err) {
+        navigate(Routes.Error)
+      }
+    },
   })
   return (
     <React.Fragment>

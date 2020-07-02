@@ -1,7 +1,7 @@
 import {axe} from 'jest-axe'
 import {waitFor, act} from '@testing-library/react'
 import MagicUser from '@testing-library/user-event'
-import {ValidUser} from '@test-utils/fixtures/users'
+import {ValidUser} from '@test-utils/fixtures/user'
 import {renderAuthForm} from './_utils'
 
 const {username, password} = ValidUser
