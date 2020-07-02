@@ -7,3 +7,9 @@ services:
       dockerfile: Dockerfile.prod
     ports:
       - 1337:80
+  server-prod:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.prod
+    ports:
+      - 1337:80

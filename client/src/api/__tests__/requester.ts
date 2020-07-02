@@ -20,8 +20,8 @@ describe('getData', () => {
 })
 describe('handleRequestFailure', () => {
   test('return error promise', async () => {
-    const data = 'MOCK_DATA'
-    const status = 200
+    const data = 'MOCK_ERROR'
+    const status = 400
     const mockResponse = {data, status} as AxiosResponse
     await handleRequestFailure(mockResponse).catch(error => {
       expect(error.data).toBe(data)

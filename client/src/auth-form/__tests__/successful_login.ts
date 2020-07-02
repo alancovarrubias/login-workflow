@@ -5,17 +5,17 @@ import {ValidUser} from '@test-utils/fixtures/users'
 import {Routes} from '@utils/routes'
 import {renderAuthForm} from './_utils'
 
+const {username, password} = ValidUser
 jest.mock('../../api/index', () => ({
   AuthFormApi: {
-    login: jest.fn(() => Promise.resolve(null)),
-    register: jest.fn(() => Promise.resolve(null)),
+    login: jest.fn(() => Promise.resolve({user: {username}})),
+    register: jest.fn(() => Promise.resolve({user: {username}})),
   },
 }))
 jest.mock('@reach/router', () => ({
   navigate: jest.fn(),
 }))
 
-const {username, password} = ValidUser
 describe('Successful user login', () => {
   describe('submitting the form', () => {
     it('navigates to the home page', async () => {
@@ -28,6 +28,9 @@ describe('Successful user login', () => {
         MagicUser.click(submitButton)
         await waitFor(() => {
           expect(navigate).toHaveBeenCalledWith(Routes.Home)
+          expect(JSON.parse(window.localStorage.getItem('user'))).toEqual({
+            username,
+          })
         })
       })
     })

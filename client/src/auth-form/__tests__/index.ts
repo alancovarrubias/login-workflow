@@ -30,21 +30,5 @@ describe('AuthForm', () => {
         expect(await waitFor(() => passwordInput)).toHaveValue(password)
       })
     })
-    /*
-    describe('clicking the button', () => {
-      it('submits the form', async () => {
-        const {getByRole} = renderAuthForm({
-          username,
-          password,
-        })
-        const submitButton = getByRole('button')
-        expect(submitButton).toBeEnabled()
-        await act(async () => {
-          MagicUser.click(submitButton)
-          expect(submitForm).toHaveBeenCalled()
-        })
-      })
-    })
-    */
   })
 })

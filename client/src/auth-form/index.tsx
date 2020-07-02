@@ -26,7 +26,10 @@ const submitForm = (page: Routes, user: User): void => {
     return AuthFormApi[pageMethodMap[page]]
   }
   const submitMethod = getAuthFormApiMethod(page)
-  const handleSuccess = (): void => navigate(Routes.Home)
+  const handleSuccess = ({user}): void => {
+    localStorage.setItem('user', JSON.stringify(user))
+    navigate(Routes.Home)
+  }
   const handleError = (): void => navigate(Routes.Error)
   submitMethod(user).then(handleSuccess, handleError)
 }
