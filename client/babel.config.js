@@ -7,8 +7,12 @@ module.exports = api => {
   const presets = [
     ['@babel/preset-env', {modules: isTest ? 'commonjs' : false}],
     '@babel/preset-typescript',
+    '@babel/preset-react',
   ]
-  const plugins = ['@babel/plugin-transform-runtime']
+  const plugins = [
+    '@babel/plugin-transform-runtime',
+    '@babel/proposal-class-properties',
+  ]
   return {
     presets,
     plugins,
